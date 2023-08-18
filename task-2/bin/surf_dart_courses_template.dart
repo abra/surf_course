@@ -26,7 +26,7 @@ class Car {
   int run;
 
   /// Кол-во колес
-  static int wheelsQty = 4;
+  static const int wheelsQty = 4;
 
   /// Используемые шины
   final List<Wheel> wheels;
@@ -87,30 +87,31 @@ class Wheel {
   }
 }
 
-abstract interface class ElectricCar {
+abstract interface class VehicleBattery {
   void chargeBattery();
 }
 
-abstract interface class GasolinCar {
+abstract interface class VehicleGasoline {
   void fillFuel(int litres);
 }
 
-class ElecticToyota extends Car implements ElectricCar {
+class ElecticToyota extends Car implements VehicleBattery {
   ElecticToyota({
     super.model = 'Toyota E-Road',
     super.year = 2020,
     super.run = 9,
     super.color = 'Yellow',
   }) : super(
-          wheels: List.filled(
-              4,
-              Wheel(
-                brand: 'Hakkapellita',
-                diameter: 17,
-                tireWidth: 195,
-                profileThickness: 50,
-                loadIndex: 91,
-              )),
+          wheels: List.generate(
+            4,
+            (_) => Wheel(
+              brand: 'Hakkapellita',
+              diameter: 17,
+              tireWidth: 195,
+              profileThickness: 50,
+              loadIndex: 91,
+            ),
+          ),
         );
 
   @override
@@ -119,21 +120,22 @@ class ElecticToyota extends Car implements ElectricCar {
   }
 }
 
-class VolkswagenPolo extends Car implements GasolinCar {
+class VolkswagenPolo extends Car implements VehicleGasoline {
   VolkswagenPolo({
     super.model = 'Volkswagen Polo',
     super.year = 2001,
     super.color = 'Black',
   }) : super(
-          wheels: List.filled(
-              4,
-              Wheel(
-                brand: 'Michelin',
-                diameter: 16,
-                tireWidth: 180,
-                profileThickness: 40,
-                loadIndex: 80,
-              )),
+          wheels: List.generate(
+            4,
+            (_) => Wheel(
+              brand: 'Michelin',
+              diameter: 16,
+              tireWidth: 180,
+              profileThickness: 40,
+              loadIndex: 80,
+            ),
+          ),
         );
 
   @override
@@ -143,14 +145,14 @@ class VolkswagenPolo extends Car implements GasolinCar {
 }
 
 class FuelStation {
-  void fuelGasolineCar(GasolinCar car, int litres) {
+  void fuelGasolineCar(VehicleGasoline car, int litres) {
     print('> Fueling car \n$car');
     car.fillFuel(litres);
   }
 }
 
 class Charger {
-  void chargeElectricCar(ElectricCar car) {
+  void chargeElectricCar(VehicleBattery car) {
     print('> Charging car \n$car');
     car.chargeBattery();
   }
