@@ -1,5 +1,28 @@
-import 'package:surf_dart_courses_template/surf_dart_courses_template.dart' as surf_dart_courses_template;
+void main() {
 
-void main(List<String> arguments) {
-  print('Hello world: ${surf_dart_courses_template.calculate()}!');
+  положить_еду_в_чашку_кота();
+  while (питомец == кот) {
+    позвать_кота();
+    break;
+  }
+  
+  положить_еду_в_чашку_кота();
+  do {
+    позвать_собаку();
+  } while (питомец == собака); 
+  
+  if (проверить_сколько_осталось_еды() > 0) {
+    добавить_еду_в_чашки();
+  } else {
+    заказать_еще_еды();
+  }
+   
+  switch(питомец) {
+    case кот:
+      поменять_наполнитель_в_лотке();
+      break;
+    case 'dog':
+      выгулять_собаку();
+      break;      
+  }  
 }
