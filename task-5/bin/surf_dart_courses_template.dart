@@ -37,10 +37,10 @@ class Team {
 
   @override
   String toString() {
-    String info = 'Команда: $teamName\n';
-    info += 'Тренер: $coach\n';
-    info += 'Игроки:\n${players.join("\n")}';
-    return info;
+    final info = StringBuffer('Команда: $teamName\n');
+    info.write('Тренер: $coach\n');
+    info.write('Игроки:\n${players.join("\n")}');
+    return info.toString();
   }
 }
 
