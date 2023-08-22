@@ -9,14 +9,14 @@ void main() {
 
   final productList = parseString(articles);
 
-  print('Категория: хлеб');
-  applyFilter(productList, CategoryBreadFilter());
+  print('Категория: хлеб, вода');
+  applyFilter(productList, CategoryFilter(categories: ['хлеб', 'вода']));
 
   print('Цена ниже или равно 500:');
-  applyFilter(productList, PriceLessOrEqual500Filter());
+  applyFilter(productList, PriceFilter((price) => price <= 500));
 
   print('Оставшееся кол-во меньше 50:');
-  applyFilter(productList, AmountLessThan50Filter());
+  applyFilter(productList, AmountFilter((amount) => amount < 50));
 }
 
 void applyFilter(List<Product> products, Filter<Product> filter) {
@@ -70,30 +70,35 @@ abstract interface class Filter<T> {
   bool apply(T value);
 }
 
-class CategoryBreadFilter implements Filter<Product> {
+class CategoryFilter implements Filter<Product> {
+  CategoryFilter({required List<String> categories}) : _categories = categories;
+
+  final List<String> _categories;
+
   @override
   bool apply(Product product) {
-    return product.category == 'хлеб';
+    return _categories.contains(product.category);
   }
 }
 
-class CategoryWaterFilter implements Filter<Product> {
+class PriceFilter implements Filter<Product> {
+  PriceFilter(Function(double) callback) : _callback = callback;
+
+  final Function(double) _callback;
+
   @override
   bool apply(Product product) {
-    return product.category == 'вода';
+    return _callback(product.price);
   }
 }
 
-class PriceLessOrEqual500Filter implements Filter<Product> {
-  @override
-  bool apply(Product product) {
-    return product.price <= 500;
-  }
-}
+class AmountFilter implements Filter<Product> {
+  AmountFilter(Function(int) callback) : _callback = callback;
 
-class AmountLessThan50Filter implements Filter<Product> {
+  final Function(int) _callback;
+
   @override
   bool apply(Product product) {
-    return product.qty < 50;
+    return _callback(product.qty);
   }
 }
