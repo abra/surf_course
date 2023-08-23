@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 List<Image> catImages = [];
@@ -66,12 +68,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void _changeImage() {
-    setState(() {
-      if (_imageIndex < catImages.length - 1) {
-        _currentImage = Image(image: catImages[++_imageIndex].image);
-      }
-    });
-    _imageIndex = (_imageIndex == catImages.length - 1) ? 0 : _imageIndex;
+    if (_imageIndex < catImages.length - 1) {
+      _currentImage = Image(image: catImages[++_imageIndex].image);
+    } else {
+      _imageIndex = 0;
+      _currentImage = Image(image: catImages[_imageIndex].image);
+    }
+    setState(() {});
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
