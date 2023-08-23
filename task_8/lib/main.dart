@@ -44,10 +44,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _decrementCounter() {
     setState(() {
-      if (_counter - 1 >= 0) {
+      if (_counter >= 1) {
         --_counter;
       }
       ++_decrement;
+    });
+  }
+
+  void _resetCounter() {
+    setState(() {
+      _increment = 0;
+      _decrement = 0;
+      _counter = 0;
     });
   }
 
@@ -98,14 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {
-                // reset
-                setState(() {
-                  _increment = 0;
-                  _decrement = 0;
-                  _counter = 0;
-                });
-              },
+              onPressed: _resetCounter,
               child: const Text('Сбросить'),
             ),
           ],
