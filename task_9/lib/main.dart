@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
-void main() {
+List<Image> catImages = [];
+
+Future<void> main() async {
+  catImages = await _loadCatImages();
   runApp(const MyApp());
 }
 
@@ -13,113 +16,146 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  int _imageIndex = 0;
+  final double _widgetHeight = 150;
+  final double _widgetWidth = 150;
+  late Image _currentImage;
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+  late Offset offset;
+  late double _screenWidth;
+  late double _screenHeight;
+  bool _firstStart = true;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    super.initState();
+    _currentImage = Image(image: catImages[_imageIndex].image);
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.linear,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _changeImage() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      if (_imageIndex < catImages.length - 1) {
+        _currentImage = Image(image: catImages[++_imageIndex].image);
+      }
     });
+    _imageIndex = (_imageIndex == catImages.length - 1) ? 0 : _imageIndex;
+  }
+
+  void _onPanUpdate(DragUpdateDetails details) {
+    double x = (offset.dx + details.delta.dx)
+        .clamp(0, _screenWidth - _widgetWidth)
+        .toDouble();
+
+    double y = (offset.dy + details.delta.dy)
+        .clamp(0, _screenHeight - _widgetHeight)
+        .toDouble();
+
+    setState(() {
+      offset = Offset(x, y);
+    });
+  }
+
+  void _rotate() {
+    _controller.repeat();
+  }
+
+  void _stopRotate(LongPressEndDetails details) {
+    _controller.reset();
+    _controller.stop();
+  }
+
+  void _init(BuildContext context) {
+    if (_firstStart) {
+      _screenWidth = MediaQuery.of(context).size.width;
+      _screenHeight = MediaQuery.of(context).size.height;
+      final currentPosX = _screenWidth / 2 - _widgetWidth / 2;
+      final currentPosY = _screenHeight / 2 - _widgetHeight / 2;
+      offset = Offset(currentPosX, currentPosY);
+      _firstStart = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    _init(context);
+
+    return ColoredBox(
+      color: const Color(0xFF077777),
+      child: Stack(
+        children: [
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 10),
+            top: offset.dy,
+            left: offset.dx,
+            child: RotationTransition(
+              turns: _animation,
+              child: AnimatedContainer(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: _currentImage.image,
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                height: _widgetHeight,
+                width: _widgetWidth,
+                duration: const Duration(milliseconds: 100),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: _changeImage,
+              onPanUpdate: _onPanUpdate,
+              onLongPress: _rotate,
+              onLongPressEnd: _stopRotate,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+Future<List<Image>> _loadCatImages() async {
+  final images = <Image>[];
+
+  for (int i = 1; i <= 8; i++) {
+    images.add(Image(image: AssetImage('assets/cats/$i.png')));
+  }
+
+  return images;
 }
