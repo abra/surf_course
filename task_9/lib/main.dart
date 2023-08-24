@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _animation;
   late Size _screenSize;
-  Offset? offset;
+  Offset? _offset;
 
   @override
   void initState() {
@@ -71,16 +71,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void _onPanUpdate(DragUpdateDetails details) {
-    double x = (offset!.dx + details.delta.dx)
+    final offset = _offset;
+
+    if (offset == null) {
+      return;
+    }
+
+    double x = (offset.dx + details.delta.dx)
         .clamp(0, _screenSize.width - _widgetWidth)
         .toDouble();
 
-    double y = (offset!.dy + details.delta.dy)
+    double y = (offset.dy + details.delta.dy)
         .clamp(0, _screenSize.height - _widgetHeight)
         .toDouble();
 
     setState(() {
-      offset = Offset(x, y);
+      _offset = Offset(x, y);
     });
   }
 
@@ -97,11 +103,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     _screenSize = MediaQuery.of(context).size;
 
-    if (offset == null) {
+    if (_offset == null) {
       final centerX = _screenSize.width / 2 - _widgetWidth / 2;
       final centerY = _screenSize.height / 2 - _widgetHeight / 2;
-      offset = Offset(centerX, centerY);
+      _offset = Offset(centerX, centerY);
     }
+
+    Offset offset = _offset!;
 
     return ColoredBox(
       color: const Color(0xFF077777),
@@ -109,8 +117,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         children: [
           AnimatedPositioned(
             duration: const Duration(milliseconds: 10),
-            top: offset!.dy,
-            left: offset!.dx,
+            top: offset.dy,
+            left: offset.dx,
             child: RotationTransition(
               turns: _animation,
               child: AnimatedContainer(
