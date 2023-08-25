@@ -56,6 +56,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _screenSize = MediaQuery.of(context).size;
+    if (_offset == null) {
+      final centerX = _screenSize.width / 2 - _widgetWidth / 2;
+      final centerY = _screenSize.height / 2 - _widgetHeight / 2;
+      _offset = Offset(centerX, centerY);
+    }
+  }
+
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -101,14 +112,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    _screenSize = MediaQuery.of(context).size;
-
-    if (_offset == null) {
-      final centerX = _screenSize.width / 2 - _widgetWidth / 2;
-      final centerY = _screenSize.height / 2 - _widgetHeight / 2;
-      _offset = Offset(centerX, centerY);
-    }
-
     Offset offset = _offset!;
 
     return ColoredBox(
