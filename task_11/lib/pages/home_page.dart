@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_11/receipt_page.dart';
 
-import 'colors.dart';
+import '../common/colors.dart';
+import '../pages/receipt_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({required this.title, super.key});
@@ -13,7 +13,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
+  int _currentIndex = 3;
+
+  final _navigationItems = <BottomNavigationBarItem>[
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.list_alt_outlined),
+      label: 'Каталог',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.search_outlined),
+      label: 'Поиск',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.shopping_basket_outlined),
+      label: 'Корзина',
+    ),
+    const BottomNavigationBarItem(
+      icon: Icon(Icons.person),
+      label: 'Личное',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +43,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Center _buildBody(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     return Center(
       child: <Widget>[
         const Icon(
@@ -56,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               child: const Text(
-                'Чек № 56 →',
+                'Список покупок →',
                 style: TextStyle(
                   fontSize: 16,
                   color: lightGreen,
@@ -69,11 +88,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  BottomNavigationBar _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar() {
     return BottomNavigationBar(
       selectedFontSize: 14,
       unselectedFontSize: 14,
-      items: _navigationItems(),
+      items: _navigationItems,
       unselectedItemColor: lightGrey,
       selectedItemColor: lightGreen,
       type: BottomNavigationBarType.fixed,
@@ -84,26 +103,5 @@ class _HomePageState extends State<HomePage> {
         });
       },
     );
-  }
-
-  List<BottomNavigationBarItem> _navigationItems() {
-    return <BottomNavigationBarItem>[
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.list_alt_outlined),
-        label: 'Каталог',
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.search_outlined),
-        label: 'Поиск',
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.shopping_basket_outlined),
-        label: 'Корзина',
-      ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.person),
-        label: 'Личное',
-      )
-    ];
   }
 }

@@ -15,6 +15,11 @@ class ProductEntity {
   /// Ответы на вопросы разместите тут (они будут проверены при код-ревью):
   ///
   /// [ОТВЕТЫ]
+  /// 1. Цена хранится в копейках, потому, что позволяет более точно представить
+  /// денежное значение. Избежать ошибок при округлении в мат операциях.
+  /// 2. Операции с int выполняют быстрее, точнее и проще.
+  /// 3. Можно было использовать decimal (?)
+  ///
   final int price;
 
   /// Категория товара.
@@ -41,6 +46,15 @@ class ProductEntity {
     required this.amount,
     this.sale = 0,
   });
+
+  double get totalPrice => price / 100;
+
+  double get priceWithSale => price * (1 - sale / 100);
+
+  @override
+  String toString() {
+    return 'ProductEntity(title: $title, price: $price, category: ${category.name})\n';
+  }
 }
 
 /// Класс, описывающий количество товара.
@@ -52,6 +66,9 @@ sealed class Amount {
 class Grams implements Amount {
   @override
   final int value;
+
+  double get toKilogram => value / 1000;
+
   Grams(this.value);
 }
 
@@ -59,6 +76,7 @@ class Grams implements Amount {
 class Quantity implements Amount {
   @override
   final int value;
+
   Quantity(this.value);
 }
 
@@ -68,6 +86,7 @@ enum Category {
   tech('Технологичные товары'),
   care('Уход'),
   drinks('Напитки'),
+  wear('Одежда'),
   drugs('Медикаменты');
 
   final String name;
