@@ -102,7 +102,7 @@ class _ReceiptPageState extends State<ReceiptPage> {
   }
 
   Future<SortType?> _showModalBottomSheet(SortType sortType) async {
-    return await showModalBottomSheet<SortType>(
+    return showModalBottomSheet<SortType>(
       isDismissible: false,
       isScrollControlled: true,
       context: context,

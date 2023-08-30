@@ -47,7 +47,7 @@ class ProductListSummaryWidget extends StatelessWidget {
               ),
             ),
             Text(
-              '$totalPrice',
+              totalPrice,
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w700,
@@ -91,7 +91,7 @@ class ProductListSummaryWidget extends StatelessWidget {
               ),
             ),
             Text(
-              '$totalPriceWithSale',
+              totalPriceWithSale,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
