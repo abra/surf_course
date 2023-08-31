@@ -31,7 +31,7 @@ class ProductListWidget extends StatelessWidget {
           /// Сортируем список продуктов по типу сортировки
           final sorted = _productSort(sortType).apply(snapshot.data!);
 
-          _buildSummaryWidget(sorted);
+          // _buildSummaryWidget(sorted);
 
           if (sortType == SortType.ascendingCategory ||
               sortType == SortType.descendingCategory) {

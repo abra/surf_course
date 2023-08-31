@@ -6,10 +6,10 @@ import '../common/sort_type.dart';
 class ModalBottomSheetWidget extends StatefulWidget {
   const ModalBottomSheetWidget({
     super.key,
-    required SortType sortType,
-  }) : _sortType = sortType;
+    required this.sortType,
+  });
 
-  final SortType _sortType;
+  final SortType sortType;
 
   @override
   State<ModalBottomSheetWidget> createState() => _ModalBottomSheetWidgetState();
@@ -21,7 +21,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   @override
   void initState() {
     super.initState();
-    _sortType = widget._sortType;
+    _sortType = widget.sortType;
   }
 
   void _onClose() {
@@ -235,8 +235,9 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                 groupValue: _sortType,
                 onChanged: (SortType? value) {
                   if (value != null) {
-                    _sortType = value;
-                    setState(() {});
+                    setState(() {
+                      _sortType = value;
+                    });
                   }
                 },
               ),

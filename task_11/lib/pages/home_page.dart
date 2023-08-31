@@ -44,47 +44,49 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildBody(BuildContext context) {
-    return Center(
-      child: <Widget>[
-        const Icon(
-          Icons.list_alt_outlined,
-          size: 80,
-          color: Colors.black12,
-        ),
-        const Icon(
-          Icons.search_outlined,
-          size: 80,
-          color: Colors.black12,
-        ),
-        const Icon(
-          Icons.shopping_basket_outlined,
-          size: 80,
-          color: Colors.black12,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Icon(Icons.person, size: 80, color: Colors.black12),
-            const SizedBox(height: 10),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const ReceiptPage(),
-                  ),
-                );
-              },
-              child: const Text(
-                'Список покупок →',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: lightGreen,
+    final List<Widget> pages = <Widget>[
+      const Icon(
+        Icons.list_alt_outlined,
+        size: 80,
+        color: Colors.black12,
+      ),
+      const Icon(
+        Icons.search_outlined,
+        size: 80,
+        color: Colors.black12,
+      ),
+      const Icon(
+        Icons.shopping_basket_outlined,
+        size: 80,
+        color: Colors.black12,
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Icon(Icons.person, size: 80, color: Colors.black12),
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const ReceiptPage(),
                 ),
+              );
+            },
+            child: const Text(
+              'Список покупок →',
+              style: TextStyle(
+                fontSize: 16,
+                color: lightGreen,
               ),
             ),
-          ],
-        ),
-      ][_currentIndex],
+          ),
+        ],
+      ),
+    ];
+
+    return Center(
+      child: pages[_currentIndex],
     );
   }
 
