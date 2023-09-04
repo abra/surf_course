@@ -44,6 +44,7 @@ class _ColorGridViewWidgetState extends State<ColorGridViewWidget> {
                   'Эксклюзивная палитра "Colored Box"',
                   style: TextStyle(
                     fontSize: 30,
+                    height: 1,
                     fontWeight: FontWeight.w700,
                     color: Color(0xFF252838),
                   ),
