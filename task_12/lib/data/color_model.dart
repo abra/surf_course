@@ -12,7 +12,8 @@ class ColorModel {
     required this.value,
   });
 
-  factory ColorModel.fromJson(Map<String, dynamic> json) => _$ColorModelFromJson(json);
+  factory ColorModel.fromJson(Map<String, dynamic> json) =>
+      _$ColorModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ColorModelToJson(this);
 

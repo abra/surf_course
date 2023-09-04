@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'data/color_repo_impl.dart';
-import 'domain/color_manager.dart';
+import 'ui/color_manager_impl.dart';
 import 'ui/screens/color_grid_view_widget.dart';
 
 void main() {
@@ -16,13 +17,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+        ),
         useMaterial3: true,
+        fontFamily: GoogleFonts.ubuntu().fontFamily,
       ),
       home: ColorGridViewWidget(
-        manager: ColorManager(
+        manager: ColorManagerImpl(
           repo: ColorRepoImpl(),
-        )
+        ),
       ),
     );
   }
