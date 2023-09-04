@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ColorSelectedWidget extends StatelessWidget {
-  ColorSelectedWidget({
+class ColorSelectedWidget extends StatefulWidget {
+  const ColorSelectedWidget({
     required this.name,
     required this.color,
     required this.hex,
@@ -13,17 +15,24 @@ class ColorSelectedWidget extends StatelessWidget {
   final Color color;
   final String hex;
 
+  @override
+  State<ColorSelectedWidget> createState() => _ColorSelectedWidgetState();
+}
+
+class _ColorSelectedWidgetState extends State<ColorSelectedWidget> {
+  String copiedColor = '';
+
   late final Map<String, int> rgbMap = {
-    'Red': color.red,
-    'Blue': color.blue,
-    'Green': color.green,
+    'Red': widget.color.red,
+    'Blue': widget.color.blue,
+    'Green': widget.color.green,
   };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: color,
+        backgroundColor: widget.color,
         elevation: 0,
         iconTheme: const IconThemeData(
           color: Colors.white, //change your color here
@@ -33,7 +42,7 @@ class ColorSelectedWidget extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              color: color,
+              color: widget.color,
             ),
           ),
           Expanded(
@@ -60,7 +69,7 @@ class ColorSelectedWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Text(
-        name,
+        widget.name,
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w700,
@@ -70,9 +79,7 @@ class ColorSelectedWidget extends StatelessWidget {
   }
 
   Widget _buildHexColorWidget(BuildContext context) {
-    final hexColor = hex
-        .replaceFirst(RegExp(r'ff'), '')
-        .toUpperCase();
+    final hexColor = widget.hex.replaceFirst(RegExp(r'#'), '').toUpperCase();
 
     return GestureDetector(
       onTap: () async {
@@ -86,6 +93,10 @@ class ColorSelectedWidget extends StatelessWidget {
               ),
             ),
           );
+        }).then((value) {
+          setState(() {
+            copiedColor = hexColor;
+          });
         });
       },
       child: Container(
@@ -115,17 +126,22 @@ class ColorSelectedWidget extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    hexColor,
+                    '#$hexColor',
                     style: const TextStyle(
                       color: Color(0xFF252838),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  const Icon(
-                    Icons.copy,
-                    color: Color(0xFFC8CBDC),
-                    size: 16,
-                  ),
+                  if (copiedColor.isNotEmpty)
+                    const Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Icon(
+                          Icons.copy,
+                          color: Color(0xFFC8CBDC),
+                          size: 16,
+                        ),
+                      ]
+                    ),
                 ],
               ),
             ),
@@ -152,6 +168,10 @@ class ColorSelectedWidget extends StatelessWidget {
                   ),
                 ),
               );
+            }).then((value) {
+              setState(() {
+                copiedColor = rgbColor;
+              });
             });
           },
           child: Container(
