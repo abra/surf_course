@@ -18,12 +18,12 @@ class ColorThumbnailWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: ColoredBox(
+          child: DecoratedBox(
+            decoration: BoxDecoration(
               color: color,
-              child: const SizedBox.expand(),
+              borderRadius: BorderRadius.circular(16),
             ),
+            child: const SizedBox.expand(),
           ),
         ),
         const SizedBox(height: 8),
