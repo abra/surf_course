@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -140,7 +138,7 @@ class _ColorSelectedWidgetState extends State<ColorSelectedWidget> {
                           color: Color(0xFFC8CBDC),
                           size: 16,
                         ),
-                      ]
+                      ],
                     ),
                 ],
               ),
@@ -174,42 +172,44 @@ class _ColorSelectedWidgetState extends State<ColorSelectedWidget> {
               });
             });
           },
-          child: Container(
+          child: SizedBox(
             height: 56,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  spreadRadius: 0.2,
-                  blurRadius: 30.0,
-                  offset: const Offset(0.0, 25.0),
-                ),
-              ],
-              color: Colors.white,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Text(key),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16),
-                  child: Row(
-                    children: [
-                      Text(
-                        rgbMap[key].toString(),
-                        style: const TextStyle(
-                          color: Color(0xFF252838),
-                        ),
-                      ),
-                    ],
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 0.2,
+                    blurRadius: 30.0,
+                    offset: const Offset(0.0, 25.0),
                   ),
-                ),
-              ],
+                ],
+                color: Colors.white,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Text(key),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Row(
+                      children: [
+                        Text(
+                          rgbMap[key].toString(),
+                          style: const TextStyle(
+                            color: Color(0xFF252838),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

@@ -1,5 +1,5 @@
 import 'color_model.dart';
 
-abstract interface class ColorRepo {
+abstract interface class ColorRepository {
   Future<List<ColorModel>> getColors();
 }

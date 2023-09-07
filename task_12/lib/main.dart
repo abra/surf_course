@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'data/color_repo_impl.dart';
+import 'data/color_repository_impl.dart';
 import 'ui/color_manager_impl.dart';
 import 'ui/screens/color_grid_view_widget.dart';
 
@@ -24,10 +24,9 @@ class MyApp extends StatelessWidget {
       ),
       home: ColorGridViewWidget(
         manager: ColorManagerImpl(
-          repo: ColorRepoImpl(),
+          repo: ColorRepositoryImpl(),
         ),
       ),
     );
   }
 }
-

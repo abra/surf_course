@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import '../data/color_repo.dart';
+import '../data/color_repository.dart';
 import 'color_entity.dart';
 import 'color_manager.dart';
 
@@ -9,7 +9,7 @@ class ColorManagerImpl implements ColorManager {
     required this.repo,
   });
 
-  final ColorRepo repo;
+  final ColorRepository repo;
 
   @override
   Future<List<ColorEntity>> getColorList() async {
