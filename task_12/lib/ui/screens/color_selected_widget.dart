@@ -79,6 +79,17 @@ class _ColorSelectedWidgetState extends State<ColorSelectedWidget> {
   Widget _buildHexColorWidget(BuildContext context) {
     final hexColor = widget.hex.replaceFirst(RegExp(r'#'), '').toUpperCase();
 
+    const row = Row(
+      children: [
+        SizedBox(width: 10),
+        Icon(
+          Icons.copy,
+          color: Color(0xFFC8CBDC),
+          size: 16,
+        ),
+      ],
+    );
+
     return GestureDetector(
       onTap: () async {
         await Clipboard.setData(
@@ -129,17 +140,7 @@ class _ColorSelectedWidgetState extends State<ColorSelectedWidget> {
                       color: Color(0xFF252838),
                     ),
                   ),
-                  if (copiedColor.isNotEmpty)
-                    const Row(
-                      children: [
-                        SizedBox(width: 10),
-                        Icon(
-                          Icons.copy,
-                          color: Color(0xFFC8CBDC),
-                          size: 16,
-                        ),
-                      ],
-                    ),
+                  copiedColor.isNotEmpty ? row : const SizedBox.shrink(),
                 ],
               ),
             ),
