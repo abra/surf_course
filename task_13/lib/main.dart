@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
+import 'data/shared_preferences_repository_impl.dart';
+import 'ui/managers/theme_manager.dart';
+import 'ui/pages/profile_screen_widget.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    ThemeManager(
+      repo: SharedPreferencesRepositoryImpl(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -9,12 +20,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return const ProfileScreenWidget();
   }
 }
