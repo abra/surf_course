@@ -56,9 +56,6 @@ class ThemeManagerState extends State<ThemeManager> {
   }
 
   void _setTheme(AppThemeMode theme) {
-    // if (theme == _appTheme) {
-    //   return;
-    // }
     _appTheme = theme;
 
     setState(() {
