@@ -12,10 +12,6 @@ class ThemeProvider extends InheritedWidget {
     required Widget child,
   }) : super(child: child);
 
-  AppThemeMode get currentAppTheme => state.currentAppTheme;
-
-  ThemeMode get currentThemeMode => state.currentThemeMode;
-
   static ThemeProvider of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<ThemeProvider>()!;
   }

@@ -24,8 +24,8 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _themeMode = ThemeProvider.of(context).currentThemeMode;
-    _appTheme = ThemeProvider.of(context).currentAppTheme;
+    _themeMode = ThemeProvider.of(context).state.currentThemeMode;
+    _appTheme = ThemeProvider.of(context).state.currentAppTheme;
   }
 
   @override
