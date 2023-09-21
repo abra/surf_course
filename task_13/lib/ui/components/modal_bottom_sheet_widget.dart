@@ -14,7 +14,7 @@ class ModalBottomSheetWidget extends StatefulWidget {
 }
 
 class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
-  AppTheme? _appTheme;
+  AppThemeMode? _appTheme;
   late ThemeMode _themeMode;
 
   void _onClose() {
@@ -90,7 +90,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                                 setState(() {
                                   _themeMode = value;
                                 });
-                                _appTheme = AppTheme.system;
+                                _appTheme = AppThemeMode.system;
                               }
                             },
                             title: Text(
@@ -143,10 +143,10 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: CustomRadioButton<AppTheme>(
-                                  value: AppTheme.light1,
+                                child: CustomRadioButton<AppThemeMode>(
+                                  value: AppThemeMode.light1,
                                   color: Colors.blueGrey,
-                                  isSelected: _appTheme == AppTheme.light1 &&
+                                  isSelected: _appTheme == AppThemeMode.light1 &&
                                       _themeMode == ThemeMode.light,
                                   onChanged: (value) {
                                     setState(() {
@@ -157,10 +157,10 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                               ),
                               const SizedBox(width: 10),
                               Expanded(
-                                child: CustomRadioButton<AppTheme>(
-                                  value: AppTheme.light2,
+                                child: CustomRadioButton<AppThemeMode>(
+                                  value: AppThemeMode.light2,
                                   color: Colors.brown,
-                                  isSelected: _appTheme == AppTheme.light2 &&
+                                  isSelected: _appTheme == AppThemeMode.light2 &&
                                       _themeMode == ThemeMode.light,
                                   onChanged: (value) {
                                     setState(() {
@@ -171,10 +171,10 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                               ),
                               const SizedBox(width: 10),
                               Expanded(
-                                child: CustomRadioButton<AppTheme>(
-                                  value: AppTheme.light3,
+                                child: CustomRadioButton<AppThemeMode>(
+                                  value: AppThemeMode.light3,
                                   color: Colors.teal,
-                                  isSelected: _appTheme == AppTheme.light3 &&
+                                  isSelected: _appTheme == AppThemeMode.light3 &&
                                       _themeMode == ThemeMode.light,
                                   onChanged: (value) {
                                     setState(() {
@@ -233,10 +233,10 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: CustomRadioButton<AppTheme>(
-                              value: AppTheme.dark1,
+                            child: CustomRadioButton<AppThemeMode>(
+                              value: AppThemeMode.dark1,
                               color: Colors.red,
-                              isSelected: _appTheme == AppTheme.dark1 &&
+                              isSelected: _appTheme == AppThemeMode.dark1 &&
                                   _themeMode == ThemeMode.dark,
                               onChanged: (value) {
                                 setState(() {
@@ -247,10 +247,10 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: CustomRadioButton<AppTheme>(
-                              value: AppTheme.dark2,
+                            child: CustomRadioButton<AppThemeMode>(
+                              value: AppThemeMode.dark2,
                               color: Colors.orange,
-                              isSelected: _appTheme == AppTheme.dark2 &&
+                              isSelected: _appTheme == AppThemeMode.dark2 &&
                                   _themeMode == ThemeMode.dark,
                               onChanged: (value) {
                                 setState(() {
@@ -261,10 +261,10 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: CustomRadioButton<AppTheme>(
-                              value: AppTheme.dark3,
+                            child: CustomRadioButton<AppThemeMode>(
+                              value: AppThemeMode.dark3,
                               color: Colors.lightGreen,
-                              isSelected: _appTheme == AppTheme.dark3 &&
+                              isSelected: _appTheme == AppThemeMode.dark3 &&
                                   _themeMode == ThemeMode.dark,
                               onChanged: (value) {
                                 setState(() {

@@ -1,7 +1,7 @@
 import '../ui/themes/app_theme_mode.dart';
 
 abstract interface class Repository {
-  Future<AppTheme> getTheme();
+  Future<AppThemeMode> getTheme();
 
-  Future<void> saveTheme(AppTheme appTheme);
+  Future<void> saveTheme(AppThemeMode appTheme);
 }

@@ -1,4 +1,4 @@
-enum AppTheme {
+enum AppThemeMode {
   system,
   light1,
   light2,

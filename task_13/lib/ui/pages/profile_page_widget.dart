@@ -148,8 +148,8 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
     );
   }
 
-  Future<AppTheme?> _showModalBottomSheet(BuildContext context) async {
-    final AppTheme? theme = await showModalBottomSheet(
+  Future<AppThemeMode?> _showModalBottomSheet(BuildContext context) async {
+    final AppThemeMode? theme = await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {

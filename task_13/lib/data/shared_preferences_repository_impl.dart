@@ -7,25 +7,25 @@ import 'repository.dart';
 
 class SharedPreferencesRepositoryImpl implements Repository {
   @override
-  Future<AppTheme> getTheme() async {
+  Future<AppThemeMode> getTheme() async {
     final prefs = await SharedPreferences.getInstance();
     String? themeString = prefs.getString(appThemeValue);
 
-    final appTheme = AppTheme.values.firstWhere(
+    final appTheme = AppThemeMode.values.firstWhere(
       (theme) {
         return describeEnum(theme) == themeString;
       },
-      orElse: () => AppTheme.system,
+      orElse: () => AppThemeMode.system,
     );
 
     return appTheme;
   }
 
   @override
-  Future<void> saveTheme(AppTheme appTheme) async {
+  Future<void> saveTheme(AppThemeMode appTheme) async {
     final prefs = await SharedPreferences.getInstance();
 
-    if (appTheme != AppTheme.system) {
+    if (appTheme != AppThemeMode.system) {
       await prefs.setString(appThemeValue, describeEnum(appTheme));
     } else {
       await prefs.setString(appThemeValue, '');

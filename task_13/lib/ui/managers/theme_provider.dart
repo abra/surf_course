@@ -12,7 +12,7 @@ class ThemeProvider extends InheritedWidget {
     required Widget child,
   }) : super(child: child);
 
-  AppTheme get currentAppTheme => state.currentAppTheme;
+  AppThemeMode get currentAppTheme => state.currentAppTheme;
 
   ThemeMode get currentThemeMode => state.currentThemeMode;
 
