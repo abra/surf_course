@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'data/shared_preferences_repository_impl.dart';
 import 'ui/managers/theme_manager.dart';
-import 'ui/pages/profile_screen_widget.dart';
+import 'ui/pages/profile_page_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
