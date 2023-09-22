@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/repository.dart';
-import '../themes/app_theme_mode.dart';
+import '../themes/app_theme.dart';
 import '../themes/custom_theme.dart';
 import 'theme_provider.dart';
 
@@ -23,12 +23,12 @@ class ThemeManagerState extends State<ThemeManager> {
   late final Repository repo;
   late final Widget child;
 
-  AppThemeMode? _appTheme;
+  AppTheme? _appTheme;
   ThemeMode _themeMode = ThemeMode.system;
   ThemeData _lightTheme = CustomTheme.light1;
   ThemeData _darkTheme = CustomTheme.dark1;
 
-  AppThemeMode get currentAppTheme => _appTheme!;
+  AppTheme get currentAppTheme => _appTheme!;
 
   ThemeMode get currentThemeMode => _themeMode;
 
@@ -47,44 +47,44 @@ class ThemeManagerState extends State<ThemeManager> {
   }
 
   Future<void> _loadTheme() async {
-    AppThemeMode savedTheme = await repo.getTheme();
+    AppTheme savedTheme = await repo.getTheme();
     _setTheme(savedTheme);
   }
 
-  void switchTheme(AppThemeMode theme) {
+  void switchTheme(AppTheme theme) {
     _setTheme(theme);
   }
 
-  void _setTheme(AppThemeMode theme) {
+  void _setTheme(AppTheme theme) {
     _appTheme = theme;
 
     setState(() {
       switch (theme) {
-        case AppThemeMode.light1:
+        case AppTheme.light1:
           _themeMode = ThemeMode.light;
           _lightTheme = CustomTheme.light1;
           break;
-        case AppThemeMode.light2:
+        case AppTheme.light2:
           _themeMode = ThemeMode.light;
           _lightTheme = CustomTheme.light2;
           break;
-        case AppThemeMode.light3:
+        case AppTheme.light3:
           _themeMode = ThemeMode.light;
           _lightTheme = CustomTheme.light3;
           break;
-        case AppThemeMode.dark1:
+        case AppTheme.dark1:
           _themeMode = ThemeMode.dark;
           _darkTheme = CustomTheme.dark1;
           break;
-        case AppThemeMode.dark2:
+        case AppTheme.dark2:
           _themeMode = ThemeMode.dark;
           _darkTheme = CustomTheme.dark2;
           break;
-        case AppThemeMode.dark3:
+        case AppTheme.dark3:
           _themeMode = ThemeMode.dark;
           _darkTheme = CustomTheme.dark3;
           break;
-        case AppThemeMode.system:
+        case AppTheme.system:
           _themeMode = ThemeMode.system;
           _lightTheme = CustomTheme.light1;
           _darkTheme = CustomTheme.dark1;

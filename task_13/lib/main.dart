@@ -5,8 +5,6 @@ import 'ui/managers/theme_manager.dart';
 import 'ui/pages/profile_page_widget.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runApp(
     ThemeManager(
       repo: SharedPreferencesRepositoryImpl(),

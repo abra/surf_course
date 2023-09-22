@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../themes/constants.dart';
 import '../themes/custom_text_style.dart';
-import 'custom_theme_extensions.dart';
+import 'custom_theme_colors_extension.dart';
 
 abstract class CustomTheme {
-  static final ThemeData _default = ThemeData(
+  static final ThemeData base = ThemeData(
     fontFamily: CustomTextStyle.fontFamily,
+    appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(
+        size: 24,
+      ),
+    ),
     bottomSheetTheme: const BottomSheetThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -17,7 +22,7 @@ abstract class CustomTheme {
     ),
   );
 
-  static final ThemeData light1 = _default.copyWith(
+  static final ThemeData light1 = base.copyWith(
     scaffoldBackgroundColor: Colors.white,
     textTheme: TextTheme(
       displayLarge: CustomTextStyle.h1.copyWith(
@@ -71,15 +76,15 @@ abstract class CustomTheme {
         ),
       ),
     ),
-    bottomSheetTheme: _default.bottomSheetTheme.copyWith(
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.white,
     ),
     extensions: const <ThemeExtension<dynamic>>[
-      CustomThemeColors.light1,
+      CustomColors.light1,
     ],
   );
 
-  static final ThemeData light2 = _default.copyWith(
+  static final ThemeData light2 = base.copyWith(
     scaffoldBackgroundColor: AppColors.skyGrey,
     textTheme: TextTheme(
       displayLarge: CustomTextStyle.h1.copyWith(
@@ -133,15 +138,15 @@ abstract class CustomTheme {
         ),
       ),
     ),
-    bottomSheetTheme: _default.bottomSheetTheme.copyWith(
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.white,
     ),
     extensions: const <ThemeExtension<dynamic>>[
-      CustomThemeColors.light2,
+      CustomColors.light2,
     ],
   );
 
-  static final ThemeData light3 = _default.copyWith(
+  static final ThemeData light3 = base.copyWith(
     scaffoldBackgroundColor: AppColors.creamy,
     textTheme: TextTheme(
       displayLarge: CustomTextStyle.h1.copyWith(
@@ -195,11 +200,11 @@ abstract class CustomTheme {
         ),
       ),
     ),
-    bottomSheetTheme: _default.bottomSheetTheme.copyWith(
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.white,
     ),
     extensions: const <ThemeExtension<dynamic>>[
-      CustomThemeColors.light3,
+      CustomColors.light3,
     ],
   );
 
@@ -238,11 +243,11 @@ abstract class CustomTheme {
         return AppColors.grey;
       }),
     ),
-    bottomSheetTheme: _default.bottomSheetTheme.copyWith(
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.darkGrey,
     ),
     extensions: const <ThemeExtension<dynamic>>[
-      CustomThemeColors.dark1,
+      CustomColors.dark1,
     ],
   );
 
@@ -281,11 +286,11 @@ abstract class CustomTheme {
         return AppColors.lightBlue;
       }),
     ),
-    bottomSheetTheme: _default.bottomSheetTheme.copyWith(
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.blueGrey,
     ),
     extensions: const <ThemeExtension<dynamic>>[
-      CustomThemeColors.dark2,
+      CustomColors.dark2,
     ],
   );
 
@@ -324,11 +329,11 @@ abstract class CustomTheme {
         return AppColors.lightBrown;
       }),
     ),
-    bottomSheetTheme: _default.bottomSheetTheme.copyWith(
+    bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.greyBrown,
     ),
     extensions: const <ThemeExtension<dynamic>>[
-      CustomThemeColors.dark3,
+      CustomColors.dark3,
     ],
   );
 }

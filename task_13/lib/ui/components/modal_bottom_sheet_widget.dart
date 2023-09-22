@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../components/custom_radio_button_widget.dart';
 import '../managers/theme_provider.dart';
-import '../themes/app_theme_mode.dart';
+import '../themes/app_theme.dart';
+import '../themes/color_palettes.dart';
+import '../themes/extensions.dart';
+import 'palette_colors_element_widget.dart';
 
 class ModalBottomSheetWidget extends StatefulWidget {
   const ModalBottomSheetWidget({
@@ -14,7 +16,8 @@ class ModalBottomSheetWidget extends StatefulWidget {
 }
 
 class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
-  AppThemeMode? _appTheme;
+  late ThemeProvider themeProvider;
+  AppTheme? _appTheme;
   late ThemeMode _themeMode;
 
   void _onClose() {
@@ -22,10 +25,16 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _themeMode = ThemeProvider.of(context).state.currentThemeMode;
-    _appTheme = ThemeProvider.of(context).state.currentAppTheme;
+    themeProvider = ThemeProvider.of(context);
+    _themeMode = themeProvider.state.currentThemeMode;
+    _appTheme = themeProvider.state.currentAppTheme;
   }
 
   @override
@@ -90,7 +99,7 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                                 setState(() {
                                   _themeMode = value;
                                 });
-                                _appTheme = AppThemeMode.system;
+                                _appTheme = AppTheme.system;
                               }
                             },
                             title: Text(
@@ -134,7 +143,12 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Цветовая схема'),
+                        Text(
+                          'Цветовая схема',
+                          style: TextStyle(
+                            color: context.color.mutedForeground,
+                          ),
+                        ),
                         const SizedBox(height: 16),
                         SizedBox(
                           height: 64,
@@ -143,44 +157,47 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: CustomRadioButton<AppThemeMode>(
-                                  value: AppThemeMode.light1,
-                                  color: Colors.blueGrey,
-                                  isSelected: _appTheme == AppThemeMode.light1 &&
+                                child: PaletteColorsElementWidget<AppTheme>(
+                                  value: AppTheme.light1,
+                                  isSelected: _appTheme == AppTheme.light1 &&
                                       _themeMode == ThemeMode.light,
                                   onChanged: (value) {
                                     setState(() {
                                       _appTheme = value;
                                     });
                                   },
+                                  palette: ColorPalettes.palette1,
+                                  elementNumber: 1,
                                 ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
-                                child: CustomRadioButton<AppThemeMode>(
-                                  value: AppThemeMode.light2,
-                                  color: Colors.brown,
-                                  isSelected: _appTheme == AppThemeMode.light2 &&
+                                child: PaletteColorsElementWidget<AppTheme>(
+                                  value: AppTheme.light2,
+                                  isSelected: _appTheme == AppTheme.light2 &&
                                       _themeMode == ThemeMode.light,
                                   onChanged: (value) {
                                     setState(() {
                                       _appTheme = value;
                                     });
                                   },
+                                  palette: ColorPalettes.palette2,
+                                  elementNumber: 2,
                                 ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
-                                child: CustomRadioButton<AppThemeMode>(
-                                  value: AppThemeMode.light3,
-                                  color: Colors.teal,
-                                  isSelected: _appTheme == AppThemeMode.light3 &&
+                                child: PaletteColorsElementWidget<AppTheme>(
+                                  value: AppTheme.light3,
+                                  isSelected: _appTheme == AppTheme.light3 &&
                                       _themeMode == ThemeMode.light,
                                   onChanged: (value) {
                                     setState(() {
                                       _appTheme = value;
                                     });
                                   },
+                                  palette: ColorPalettes.palette3,
+                                  elementNumber: 3,
                                 ),
                               ),
                             ],
@@ -224,7 +241,13 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Цветовая схема'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Text(
+                        'Цветовая схема',
+                        style: TextStyle(color: context.color.mutedForeground),
+                      ),
+                    ),
                     const SizedBox(height: 16),
                     SizedBox(
                       height: 64,
@@ -233,44 +256,47 @@ class _ModalBottomSheetWidgetState extends State<ModalBottomSheetWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: CustomRadioButton<AppThemeMode>(
-                              value: AppThemeMode.dark1,
-                              color: Colors.red,
-                              isSelected: _appTheme == AppThemeMode.dark1 &&
+                            child: PaletteColorsElementWidget<AppTheme>(
+                              value: AppTheme.dark1,
+                              isSelected: _appTheme == AppTheme.dark1 &&
                                   _themeMode == ThemeMode.dark,
                               onChanged: (value) {
                                 setState(() {
                                   _appTheme = value;
                                 });
                               },
+                              palette: ColorPalettes.palette1,
+                              elementNumber: 1,
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: CustomRadioButton<AppThemeMode>(
-                              value: AppThemeMode.dark2,
-                              color: Colors.orange,
-                              isSelected: _appTheme == AppThemeMode.dark2 &&
+                            child: PaletteColorsElementWidget<AppTheme>(
+                              value: AppTheme.dark2,
+                              isSelected: _appTheme == AppTheme.dark2 &&
                                   _themeMode == ThemeMode.dark,
                               onChanged: (value) {
                                 setState(() {
                                   _appTheme = value;
                                 });
                               },
+                              palette: ColorPalettes.palette2,
+                              elementNumber: 2,
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: CustomRadioButton<AppThemeMode>(
-                              value: AppThemeMode.dark3,
-                              color: Colors.lightGreen,
-                              isSelected: _appTheme == AppThemeMode.dark3 &&
+                            child: PaletteColorsElementWidget<AppTheme>(
+                              value: AppTheme.dark3,
+                              isSelected: _appTheme == AppTheme.dark3 &&
                                   _themeMode == ThemeMode.dark,
                               onChanged: (value) {
                                 setState(() {
                                   _appTheme = value;
                                 });
                               },
+                              palette: ColorPalettes.palette3,
+                              elementNumber: 3,
                             ),
                           ),
                         ],

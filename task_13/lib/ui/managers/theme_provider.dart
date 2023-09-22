@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../themes/app_theme_mode.dart';
 import 'theme_manager.dart';
 
 class ThemeProvider extends InheritedWidget {

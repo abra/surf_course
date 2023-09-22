@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../themes/custom_theme_extensions.dart';
+import '../themes/extensions.dart';
 
 class ProfileElementWidget extends StatelessWidget {
   const ProfileElementWidget({
@@ -16,14 +16,12 @@ class ProfileElementWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final customThemeColors = Theme.of(context).extension<CustomThemeColors>()!;
-
     return GestureDetector(
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
-          color: customThemeColors.profileElementBackground,
+          color: context.color.profileElementBackground,
         ),
         child: SizedBox(
           width: double.infinity,
@@ -40,13 +38,13 @@ class ProfileElementWidget extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        color: customThemeColors.profileElementTitle,
+                        color: context.color.mutedForeground,
                       ),
                     ),
                     Text(
                       text,
                       style: TextStyle(
-                        color: customThemeColors.profileElementText,
+                        color: context.color.primaryForeground,
                       ),
                     ),
                   ],

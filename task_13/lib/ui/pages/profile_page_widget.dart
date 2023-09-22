@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../components/modal_bottom_sheet_widget.dart';
 import '../components/profile_element_widget.dart';
 import '../managers/theme_provider.dart';
-import '../themes/app_theme_mode.dart';
-import '../themes/custom_theme_extensions.dart';
+import '../themes/app_theme.dart';
+import '../themes/extensions.dart';
 
 class ProfileScreenWidget extends StatefulWidget {
   const ProfileScreenWidget({super.key});
@@ -16,8 +16,6 @@ class ProfileScreenWidget extends StatefulWidget {
 class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
   @override
   Widget build(BuildContext context) {
-    final customThemeColors = Theme.of(context).extension<CustomThemeColors>()!;
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -75,7 +73,7 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
                 Text(
                   'Мои награды',
                   style: TextStyle(
-                    color: customThemeColors.profileElementTitle,
+                    color: context.color.mutedForeground,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -148,8 +146,8 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
     );
   }
 
-  Future<AppThemeMode?> _showModalBottomSheet(BuildContext context) async {
-    final AppThemeMode? theme = await showModalBottomSheet(
+  Future<AppTheme?> _showModalBottomSheet(BuildContext context) async {
+    final AppTheme? theme = await showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (BuildContext context) {
