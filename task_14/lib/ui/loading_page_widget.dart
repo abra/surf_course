@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'constants.dart';
+import '../constants.dart';
 
 class LoadingPageWidget extends StatelessWidget {
   const LoadingPageWidget({
@@ -17,7 +17,7 @@ class LoadingPageWidget extends StatelessWidget {
           FractionallySizedBox(
             alignment: Alignment.center,
             widthFactor: 0.4,
-            child: Image.asset(appLogo),
+            child: Image.asset(appLogoPath),
           ),
           const SizedBox(height: 20),
           const Center(

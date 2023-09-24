@@ -1,12 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
+import '../constants.dart';
 import '../data/post.dart';
-import 'constants.dart';
+import 'post_page_view_widget.dart';
 
-class PostsGridView extends StatelessWidget {
-  const PostsGridView({
+class PostsGridViewWidget extends StatelessWidget {
+  const PostsGridViewWidget({
     super.key,
     required this.posts,
   });
@@ -16,13 +15,14 @@ class PostsGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: white,
         elevation: 0,
         centerTitle: true,
         title: SizedBox(
           height: 34,
-          child: Image.asset(appLogo),
+          child: Image.asset(appLogoPath),
         ),
       ),
       body: GridView.builder(
@@ -36,7 +36,15 @@ class PostsGridView extends StatelessWidget {
             padding: const EdgeInsets.all(2.0),
             child: GestureDetector(
               onTap: () {
-                log('id: ${posts[index].id.toString()}');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostPageViewWidget(
+                      postId: posts[index].id,
+                      posts: posts,
+                    ),
+                  ),
+                );
               },
               child: Image.asset(
                 posts[index].path,

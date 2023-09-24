@@ -5,11 +5,9 @@ import 'data/post_repository_impl.dart';
 import 'data/repository.dart';
 import 'ui/error_page_widget.dart';
 import 'ui/loading_page_widget.dart';
-import 'ui/posts_grid_view.dart';
+import 'ui/posts_grid_view_widget.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   runApp(Postogram(
     repo: PostRepositoryImpl(),
   ));
@@ -45,7 +43,7 @@ class _PostogramState extends State<Postogram> {
           builder: (BuildContext context, AsyncSnapshot<List<Post>> snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.data!;
-              return PostsGridView(posts: data);
+              return PostsGridViewWidget(posts: data);
             } else if (snapshot.hasError) {
               return ErrorPageWidget(
                 message: snapshot.error.toString(),
