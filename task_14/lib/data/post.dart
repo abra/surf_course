@@ -1,21 +1,21 @@
 class Post {
-  final int post;
+  final int id;
   final String path;
 
   Post({
-    required this.post,
+    required this.id,
     required this.path,
   });
 
-  static fromJson(e) {
+  static fromJson(Map<String, dynamic> json) {
     return Post(
-      post: e['post'],
-      path: e['file'],
+      id: json['id'] as int,
+      path: json['path'] as String,
     );
   }
 
   @override
   String toString() {
-    return 'Post{post: $post, path: $path}';
+    return 'Post{id: $id, path: $path}';
   }
 }

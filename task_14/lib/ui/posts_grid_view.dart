@@ -36,7 +36,7 @@ class PostsGridView extends StatelessWidget {
             padding: const EdgeInsets.all(2.0),
             child: GestureDetector(
               onTap: () {
-                log(posts[index].path);
+                log('id: ${posts[index].id.toString()}');
               },
               child: Image.asset(
                 posts[index].path,
