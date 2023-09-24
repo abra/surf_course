@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'data/post.dart';
 import 'data/post_repository_impl.dart';
 import 'data/repository.dart';
-import 'ui/constants.dart';
+import 'ui/error_page_widget.dart';
+import 'ui/loading_page_widget.dart';
 import 'ui/posts_grid_view.dart';
 
 void main() async {
@@ -46,26 +47,11 @@ class _PostogramState extends State<Postogram> {
               final data = snapshot.data!;
               return PostsGridView(posts: data);
             } else if (snapshot.hasError) {
-              return Center(
-                child: Text('${snapshot.error}'),
+              return ErrorPageWidget(
+                message: snapshot.error.toString(),
               );
             } else {
-              return Container(
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FractionallySizedBox(
-                      widthFactor: 0.4,
-                      child: Image.asset(appLogo),
-                    ),
-                    const SizedBox(height: 20),
-                    const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ],
-                ),
-              );
+              return const LoadingPageWidget();
             }
           },
         ),
