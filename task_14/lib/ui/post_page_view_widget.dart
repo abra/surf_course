@@ -37,7 +37,7 @@ class _PostPageViewWidgetState extends State<PostPageViewWidget> {
     _posts = widget.posts;
     _pageController = PageController(
       initialPage: _currentPost,
-      viewportFraction: 0.75,
+      viewportFraction: 0.85,
     );
     _pageController.addListener(_onPageChanged);
   }
@@ -56,7 +56,7 @@ class _PostPageViewWidgetState extends State<PostPageViewWidget> {
       backgroundColor: white,
       appBar: AppBar(
         backgroundColor: white,
-        foregroundColor: const Color(0xFF222222),
+        foregroundColor: black,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
@@ -75,6 +75,7 @@ class _PostPageViewWidgetState extends State<PostPageViewWidget> {
                     '${_currentPost + 1}',
                     style: const TextStyle(
                       fontSize: 18,
+                      fontFamily: 'SF Pro Display Regular',
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -82,6 +83,7 @@ class _PostPageViewWidgetState extends State<PostPageViewWidget> {
                     '/${_posts.length}',
                     style: const TextStyle(
                       fontSize: 18,
+                      fontFamily: 'SF Pro Display Regular',
                       fontWeight: FontWeight.w700,
                       color: grey,
                     ),
@@ -98,7 +100,7 @@ class _PostPageViewWidgetState extends State<PostPageViewWidget> {
         itemBuilder: (_, index) {
           return AnimatedScale(
             duration: const Duration(milliseconds: 300),
-            scale: _currentPost == index ? 1 : 0.85,
+            scale: _currentPost == index ? 1 : 0.9,
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 30.0,

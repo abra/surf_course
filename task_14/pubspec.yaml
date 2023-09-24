@@ -23,3 +23,9 @@ flutter:
     - assets/images/
     - assets/json/images.json
     - assets/logo/postogram.png
+
+  fonts:
+    - family: SF Pro Display
+      fonts:
+        - asset: assets/fonts/SF-Pro-Display-Regular.otf
+          weight: 700

@@ -7,3 +7,4 @@ const jsonDataPath = 'assets/json/images.json';
 /// colors
 const white = Color(0xFFFFFFFF);
 const grey = Color(0xFFBFBFBF);
+const black = Color(0xFF222222);
