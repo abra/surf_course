@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shake/shake.dart';
 
 import '../../data/repository.dart';
 import '../components/light_source_widget.dart';
@@ -22,15 +23,29 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
   late AnimationController _ballController;
   late AnimationController _lightController;
   late Animation<double> _ballScaleAnimation;
+  late Animation<double> _ballOpacityAnimation;
   late Animation<double> _lightOpacityAnimation;
-  late Animation<double> _ballOpacity;
+  late ShakeDetector _shakeDetector;
   bool _getMessage = false;
   double _bottomTextPosition = 56.0;
 
   @override
   void initState() {
     super.initState();
+
+    _shakeDetector = ShakeDetector.autoStart(
+      onPhoneShake: _ballAction,
+    );
+
     _initAnimation();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _ballController.dispose();
+    _lightController.dispose();
+    _shakeDetector.stopListening();
   }
 
   void _initAnimation() {
@@ -58,7 +73,7 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
       ),
     );
 
-    _ballOpacity = Tween<double>(begin: 1.0, end: 0.2).animate(
+    _ballOpacityAnimation = Tween<double>(begin: 1.0, end: 0.2).animate(
       CurvedAnimation(
         parent: _lightController,
         curve: Curves.linear,
@@ -92,13 +107,6 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _ballController.dispose();
-    _lightController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
@@ -122,25 +130,14 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      if (_ballScaleAnimation.status ==
-                          AnimationStatus.dismissed) {
-                        _ballController.forward();
-                      } else {
-                        setState(() {
-                          _getMessage = false;
-                        });
-
-                        _ballController.reverse();
-                      }
-                    },
+                    onTap: _ballAction,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
                         ScaleTransition(
                           scale: _ballScaleAnimation,
                           child: FadeTransition(
-                            opacity: _ballOpacity,
+                            opacity: _ballOpacityAnimation,
                             child: const CrystalBallWidget(),
                           ),
                         ),
@@ -177,5 +174,17 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
         ],
       ),
     );
+  }
+
+  void _ballAction() {
+    if (_ballScaleAnimation.status == AnimationStatus.dismissed) {
+      _ballController.forward();
+    } else {
+      setState(() {
+        _getMessage = false;
+      });
+
+      _ballController.reverse();
+    }
   }
 }

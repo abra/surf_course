@@ -11,6 +11,7 @@ class RemoteApiRepositoryImpl implements Repository {
     final response = await http.get(
       Uri.parse('https://eightballapi.com/api'),
     );
+
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
       return MessageEntity(data['reading']);

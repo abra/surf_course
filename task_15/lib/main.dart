@@ -4,6 +4,8 @@ import 'data/rest_api_repository_impl.dart';
 import 'ui/pages/magic_ball_page_widget.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MainApp());
 }
 
