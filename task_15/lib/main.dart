@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'data/rest_api_repository_impl.dart';
+import 'data/remote_api_repository_impl.dart';
 import 'ui/pages/magic_ball_page_widget.dart';
 
 void main() {
