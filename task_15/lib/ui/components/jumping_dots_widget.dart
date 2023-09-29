@@ -17,9 +17,9 @@ class _JumpingDotsWidgetState extends State<JumpingDotsWidget>
   final double _size = 8;
   final double _initialScale = 1.0;
   final double _scale = 2.0;
-  late List<AnimationController> _controllers;
-  late List<Animation<double>> _dotAnimations;
-  late int _numberOfDots;
+  late final List<AnimationController> _controllers;
+  late final List<Animation<double>> _dotAnimations;
+  late final int _numberOfDots;
 
   @override
   void initState() {
