@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
 
+import '../common/extensions.dart';
 import 'data/post.dart';
-import 'data/post_repository_impl.dart';
-import 'data/posts_data_interface.dart';
 import 'ui/error_page_widget.dart';
 import 'ui/loading_page_widget.dart';
 import 'ui/posts_grid_view_widget.dart';
 
 void main() async {
-  runApp(Postogram(
-    repo: PostRepositoryImpl(),
-  ));
+  runApp(const Postogram());
 }
 
 class Postogram extends StatefulWidget {
   const Postogram({
     super.key,
-    required this.repo,
   });
-
-  final PostsDataInterface repo;
 
   @override
   State<Postogram> createState() => _PostogramState();
@@ -31,7 +25,7 @@ class _PostogramState extends State<Postogram> {
   @override
   void initState() {
     super.initState();
-    futureData = widget.repo.getPosts();
+    futureData = context.postsRepository.getPosts();
   }
 
   @override

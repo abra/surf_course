@@ -6,7 +6,7 @@ import '../constants.dart';
 import 'post.dart';
 import 'posts_data_interface.dart';
 
-class PostRepositoryImpl implements PostsDataInterface {
+class PostsRepositoryImpl implements PostsDataInterface {
   final List<Post> _posts = [];
 
   @override
