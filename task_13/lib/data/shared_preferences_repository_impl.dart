@@ -3,9 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../ui/themes/app_theme.dart';
 import '../ui/themes/constants.dart';
-import 'repository.dart';
+import 'theme_data_interface.dart';
 
-class SharedPreferencesRepositoryImpl implements Repository {
+class SharedPreferencesRepositoryImpl implements ThemeDataInterface {
   @override
   Future<AppTheme> getTheme() async {
     final prefs = await SharedPreferences.getInstance();
