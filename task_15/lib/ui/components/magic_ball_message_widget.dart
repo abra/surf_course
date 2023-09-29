@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../common/extensions.dart';
 import '../../data/message_entity.dart';
-import '../../data/repository.dart';
 import 'jumping_dots_indicator_widget.dart';
 
 class MagicBallMessageWidget extends StatelessWidget {
   const MagicBallMessageWidget({
     super.key,
-    required this.repository,
     required this.shouldFetchMessage,
   });
 
-  final Repository repository;
   final bool shouldFetchMessage;
 
   @override
@@ -23,7 +21,7 @@ class MagicBallMessageWidget extends StatelessWidget {
         }
 
         return FutureBuilder<MessageEntity>(
-          future: repository.getMessage(),
+          future: context.messagesRepository.getMessage(),
           builder: (BuildContext ctx, AsyncSnapshot<MessageEntity> snapshot) {
             return AnimatedSwitcher(
               duration: const Duration(milliseconds: 500),

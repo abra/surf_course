@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shake/shake.dart';
+import 'package:surf_flutter_courses_template/common/extensions.dart';
 
-import '../../data/repository.dart';
+import '../../data/messages_repository.dart';
 import '../components/light_source_widget.dart';
 import '../components/magic_ball_message_widget.dart';
 import '../components/magic_ball_widget.dart';
@@ -9,10 +10,7 @@ import '../components/magic_ball_widget.dart';
 class MagicBallPageWidget extends StatefulWidget {
   const MagicBallPageWidget({
     super.key,
-    required this.repository,
   });
-
-  final Repository repository;
 
   @override
   State<MagicBallPageWidget> createState() => _MagicBallPageWidgetState();
@@ -142,7 +140,6 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
                           ),
                         ),
                         MagicBallMessageWidget(
-                          repository: widget.repository,
                           shouldFetchMessage: _shouldFetchMessage,
                         ),
                       ],

@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'message_entity.dart';
-import 'repository.dart';
+import 'messages_repository.dart';
 
-class MockRepositoryImpl implements Repository {
+class MockRepositoryImpl implements MessagesRepository {
   @override
   Future<MessageEntity> getMessage() async {
     await Future.delayed(const Duration(seconds: 4));

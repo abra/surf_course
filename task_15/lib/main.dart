@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'data/remote_api_repository_impl.dart';
 import 'ui/pages/magic_ball_page_widget.dart';
 
 void main() {
@@ -14,12 +13,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: MagicBallPageWidget(
-          repository: RemoteApiRepositoryImpl(),
-        ),
+        body: MagicBallPageWidget(),
       ),
     );
   }

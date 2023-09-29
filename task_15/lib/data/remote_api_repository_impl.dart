@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'message_entity.dart';
-import 'repository.dart';
+import 'messages_repository.dart';
 
-class RemoteApiRepositoryImpl implements Repository {
+class RemoteApiRepositoryImpl implements MessagesRepository {
   @override
   Future<MessageEntity> getMessage() async {
     final response = await http.get(
