@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class JumpingDotsWidget extends StatefulWidget {
-  const JumpingDotsWidget({
+class JumpingDotsIndicatorWidget extends StatefulWidget {
+  const JumpingDotsIndicatorWidget({
     super.key,
     required this.numberOfDots,
   });
@@ -9,10 +9,10 @@ class JumpingDotsWidget extends StatefulWidget {
   final int numberOfDots;
 
   @override
-  State<JumpingDotsWidget> createState() => _JumpingDotsWidgetState();
+  State<JumpingDotsIndicatorWidget> createState() => _JumpingDotsIndicatorWidgetState();
 }
 
-class _JumpingDotsWidgetState extends State<JumpingDotsWidget>
+class _JumpingDotsIndicatorWidgetState extends State<JumpingDotsIndicatorWidget>
     with TickerProviderStateMixin {
   final double _size = 8;
   final double _initialScale = 1.0;

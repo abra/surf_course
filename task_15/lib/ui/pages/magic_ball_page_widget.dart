@@ -26,7 +26,7 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
   late Animation<double> _ballOpacityAnimation;
   late Animation<double> _lightOpacityAnimation;
   late ShakeDetector _shakeDetector;
-  bool _getMessage = false;
+  bool _shouldFetchMessage = false;
   double _bottomTextPosition = 56.0;
 
   @override
@@ -84,7 +84,7 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
       if (status == AnimationStatus.forward) {
         _lightController.forward();
         setState(() {
-          _getMessage = true;
+          _shouldFetchMessage = true;
         });
       }
       if (status == AnimationStatus.dismissed) {
@@ -143,7 +143,7 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
                         ),
                         MagicBallMessageWidget(
                           repository: widget.repository,
-                          getMessage: _getMessage,
+                          shouldFetchMessage: _shouldFetchMessage,
                         ),
                       ],
                     ),
@@ -181,7 +181,7 @@ class _MagicBallPageWidgetState extends State<MagicBallPageWidget>
       _ballController.forward();
     } else {
       setState(() {
-        _getMessage = false;
+        _shouldFetchMessage = false;
       });
 
       _ballController.reverse();
