@@ -69,26 +69,26 @@ class _PostPageViewWidgetState extends State<PostPageViewWidget> {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(right: 20.0),
-              child: Row(
-                children: [
-                  Text(
-                    '${_currentPost + 1}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'SF Pro Display Regular',
-                      fontWeight: FontWeight.w700,
-                    ),
+              child: RichText(
+                text: TextSpan(
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'SF Pro Display Regular',
+                    fontWeight: FontWeight.w700,
+                    color: black,
                   ),
-                  Text(
-                    '/${_posts.length}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'SF Pro Display Regular',
-                      fontWeight: FontWeight.w700,
-                      color: grey,
+                  children: [
+                    TextSpan(
+                      text: '${_currentPost + 1}',
                     ),
-                  ),
-                ],
+                    TextSpan(
+                      text: '/${_posts.length}',
+                      style: const TextStyle(
+                        color: grey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
