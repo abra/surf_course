@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:surf_flutter_courses_template/ui/themes/extensions.dart';
 
 import '../components/modal_bottom_sheet_widget.dart';
 import '../components/profile_element_widget.dart';
 import '../managers/theme_provider.dart';
 import '../themes/app_theme.dart';
-import '../themes/extensions.dart';
 
 class ProfileScreenWidget extends StatefulWidget {
   const ProfileScreenWidget({super.key});
@@ -38,6 +38,19 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: OutlinedButton(
+              onPressed: () {},
+              child: const Text('Log Out'),
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(
           top: 28,
@@ -45,100 +58,86 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
           right: 20,
           bottom: 40,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: ListView(
           children: [
-            Column(
-              children: [
-                Center(
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage:
-                        const AssetImage('assets/images/profile.png'),
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.black.withOpacity(0.5),
-                      child: const Text(
-                        'Edit',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                      ),
+            Center(
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: const AssetImage('assets/images/profile.png'),
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.black.withOpacity(0.5),
+                  child: const Text(
+                    'Edit',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-                const SizedBox(height: 28),
-                Text(
-                  'Мои награды',
-                  style: TextStyle(
-                    color: context.color.mutedForeground,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('🥇', style: TextStyle(fontSize: 32)),
-                    SizedBox(width: 16),
-                    Text('🥇', style: TextStyle(fontSize: 32)),
-                    SizedBox(width: 16),
-                    Text('🥉', style: TextStyle(fontSize: 32)),
-                    SizedBox(width: 16),
-                    Text('🥈', style: TextStyle(fontSize: 32)),
-                    SizedBox(width: 16),
-                    Text('🥉', style: TextStyle(fontSize: 32)),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                const ProfileElementWidget(
-                  title: 'Имя',
-                  text: 'Маркус Хассельборг',
-                ),
-                const SizedBox(height: 8),
-                const ProfileElementWidget(
-                  title: 'Email',
-                  text: 'MarkusHSS@gmail.com',
-                ),
-                const SizedBox(height: 8),
-                const ProfileElementWidget(
-                  title: 'Дата рождения',
-                  text: '03.03.1986',
-                ),
-                const SizedBox(height: 8),
-                ProfileElementWidget(
-                  title: 'Команда',
-                  text: 'Сборная Швеции',
-                  onTap: () {},
-                ),
-                const SizedBox(height: 8),
-                ProfileElementWidget(
-                  title: 'Позиция',
-                  text: 'Скип',
-                  onTap: () {},
-                ),
-                const SizedBox(height: 8),
-                ProfileElementWidget(
-                  title: 'Тема оформления',
-                  text: ThemeProvider.of(context).state.currentThemeModeName,
-                  onTap: () async {
-                    final theme = await _showModalBottomSheet(context);
-
-                    if (theme != null && mounted) {
-                      ThemeProvider.of(context).state.switchTheme(theme);
-                    }
-                  },
-                ),
+              ),
+            ),
+            const SizedBox(height: 28),
+            Text(
+              'Мои награды',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: context.color.mutedForeground,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('🥇', style: TextStyle(fontSize: 32)),
+                SizedBox(width: 16),
+                Text('🥇', style: TextStyle(fontSize: 32)),
+                SizedBox(width: 16),
+                Text('🥉', style: TextStyle(fontSize: 32)),
+                SizedBox(width: 16),
+                Text('🥈', style: TextStyle(fontSize: 32)),
+                SizedBox(width: 16),
+                Text('🥉', style: TextStyle(fontSize: 32)),
               ],
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: OutlinedButton(
-                onPressed: () {},
-                child: const Text('Log Out'),
-              ),
+            const SizedBox(height: 24),
+            const ProfileElementWidget(
+              title: 'Имя',
+              text: 'Маркус Хассельборг',
+            ),
+            const SizedBox(height: 8),
+            const ProfileElementWidget(
+              title: 'Email',
+              text: 'MarkusHSS@gmail.com',
+            ),
+            const SizedBox(height: 8),
+            const ProfileElementWidget(
+              title: 'Дата рождения',
+              text: '03.03.1986',
+            ),
+            const SizedBox(height: 8),
+            ProfileElementWidget(
+              title: 'Команда',
+              text: 'Сборная Швеции',
+              onTap: () {},
+            ),
+            const SizedBox(height: 8),
+            ProfileElementWidget(
+              title: 'Позиция',
+              text: 'Скип',
+              onTap: () {},
+            ),
+            const SizedBox(height: 8),
+            ProfileElementWidget(
+              title: 'Тема оформления',
+              text: ThemeProvider.of(context).state.currentThemeModeName,
+              onTap: () async {
+                final theme = await _showModalBottomSheet(context);
+
+                if (theme != null && mounted) {
+                  ThemeProvider.of(context).state.switchTheme(theme);
+                }
+              },
             ),
           ],
         ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../data/repository.dart';
+import '../../data/theme_data_interface.dart';
 import '../themes/app_theme.dart';
 import '../themes/custom_theme.dart';
 import 'theme_provider.dart';
 
 class ThemeManager extends StatefulWidget {
-  final Repository repo;
+  final ThemeDataInterface repo;
   final Widget child;
 
   const ThemeManager({
@@ -20,7 +20,7 @@ class ThemeManager extends StatefulWidget {
 }
 
 class ThemeManagerState extends State<ThemeManager> {
-  late final Repository repo;
+  late final ThemeDataInterface repo;
   late final Widget child;
 
   AppTheme? _appTheme;

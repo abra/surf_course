@@ -12,6 +12,10 @@ abstract class CustomTheme {
         size: 24,
       ),
     ),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      padding: EdgeInsets.symmetric(vertical: 0.0),
+      elevation: 0,
+    ),
     bottomSheetTheme: const BottomSheetThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -76,6 +80,9 @@ abstract class CustomTheme {
         ),
       ),
     ),
+    bottomAppBarTheme: base.bottomAppBarTheme.copyWith(
+      color: AppColors.white,
+    ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.white,
     ),
@@ -137,6 +144,9 @@ abstract class CustomTheme {
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
+    ),
+    bottomAppBarTheme: base.bottomAppBarTheme.copyWith(
+      color: AppColors.skyGrey,
     ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.white,
@@ -200,6 +210,9 @@ abstract class CustomTheme {
         ),
       ),
     ),
+    bottomAppBarTheme: base.bottomAppBarTheme.copyWith(
+      color: AppColors.creamy,
+    ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.white,
     ),
@@ -242,6 +255,9 @@ abstract class CustomTheme {
         }
         return AppColors.grey;
       }),
+    ),
+    bottomAppBarTheme: base.bottomAppBarTheme.copyWith(
+      color: AppColors.black,
     ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.darkGrey,
@@ -286,6 +302,9 @@ abstract class CustomTheme {
         return AppColors.lightBlue;
       }),
     ),
+    bottomAppBarTheme: base.bottomAppBarTheme.copyWith(
+      color: AppColors.darkBlue,
+    ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.blueGrey,
     ),
@@ -328,6 +347,9 @@ abstract class CustomTheme {
         }
         return AppColors.lightBrown;
       }),
+    ),
+    bottomAppBarTheme: base.bottomAppBarTheme.copyWith(
+      color: AppColors.darkBrown,
     ),
     bottomSheetTheme: base.bottomSheetTheme.copyWith(
       modalBackgroundColor: AppColors.greyBrown,
