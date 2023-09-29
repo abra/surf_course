@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 
 import '../constants.dart';
 import 'post.dart';
-import 'repository.dart';
+import 'posts_data_interface.dart';
 
-class PostRepositoryImpl implements Repository {
+class PostRepositoryImpl implements PostsDataInterface {
   final List<Post> _posts = [];
 
   @override

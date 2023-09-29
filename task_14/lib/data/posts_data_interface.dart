@@ -1,5 +1,5 @@
 import 'post.dart';
 
-abstract interface class Repository {
+abstract interface class PostsDataInterface {
   Future<List<Post>> getPosts();
 }

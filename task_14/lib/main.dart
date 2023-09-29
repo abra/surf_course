@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'data/post.dart';
 import 'data/post_repository_impl.dart';
-import 'data/repository.dart';
+import 'data/posts_data_interface.dart';
 import 'ui/error_page_widget.dart';
 import 'ui/loading_page_widget.dart';
 import 'ui/posts_grid_view_widget.dart';
@@ -19,7 +19,7 @@ class Postogram extends StatefulWidget {
     required this.repo,
   });
 
-  final Repository repo;
+  final PostsDataInterface repo;
 
   @override
   State<Postogram> createState() => _PostogramState();
