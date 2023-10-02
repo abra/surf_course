@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../common/extensions.dart';
 import '../../data/theme_data_interface.dart';
 import '../themes/app_theme.dart';
 import '../themes/custom_theme.dart';
 import 'theme_provider.dart';
 
 class ThemeManager extends StatefulWidget {
-  final ThemeDataInterface repo;
   final Widget child;
 
   const ThemeManager({
     super.key,
-    required this.repo,
     required this.child,
   });
 
@@ -39,9 +38,9 @@ class ThemeManagerState extends State<ThemeManager> {
       };
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    repo = widget.repo;
+  void initState() {
+    super.initState();
+    repo = context.themeRepository;
     child = widget.child;
     _loadTheme();
   }

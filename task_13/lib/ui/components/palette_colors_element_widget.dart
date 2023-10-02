@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../common/extensions.dart';
 import '../themes/color_palettes.dart';
 import '../themes/custom_text_style.dart';
-import '../themes/extensions.dart';
 
 class PaletteColorsElementWidget<T> extends StatelessWidget {
   const PaletteColorsElementWidget({

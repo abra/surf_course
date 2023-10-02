@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../themes/extensions.dart';
+import '../../common/extensions.dart';
 
 class ProfileElementWidget extends StatelessWidget {
   const ProfileElementWidget({

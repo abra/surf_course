@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../common/extensions.dart';
 import '../managers/theme_provider.dart';
 import '../themes/app_theme.dart';
 import '../themes/color_palettes.dart';
-import '../themes/extensions.dart';
 import 'palette_colors_element_widget.dart';
 
 class ModalBottomSheetWidget extends StatefulWidget {
