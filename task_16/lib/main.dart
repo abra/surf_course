@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'ui/themes/app_theme.dart';
+import 'ui/pages/pet_registration_page_widget.dart';
+
 void main() {
   runApp(const PetHealthApp());
 }
@@ -9,10 +12,11 @@ class PetHealthApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      theme: AppTheme.appTheme,
+      home: const Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: PetRegistrationPageWidget(),
         ),
       ),
     );
