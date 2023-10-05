@@ -34,11 +34,11 @@ class AppTheme {
       rangePickerHeaderBackgroundColor: Colors.orange,
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      contentPadding: EdgeInsets.symmetric(
-        vertical: 20,
-        horizontal: 20,
-      ),
       isDense: true,
+      contentPadding: EdgeInsets.symmetric(
+        vertical: 13,
+        horizontal: 16,
+      ),
       labelStyle: TextStyle(
         color: AppColors.grey,
         fontSize: 16,
