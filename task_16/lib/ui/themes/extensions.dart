@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:surf_flutter_courses_template/ui/themes/pet_icon_colors.dart';
 
-extension AppThemeExt on BuildContext {
+import 'pet_icon_colors.dart';
+import 'pet_text_field_theme.dart';
+
+extension BuildContextExt on BuildContext {
   ThemeData get appTheme => Theme.of(this);
 
-  PetIconColors get petIconColors =>
-      Theme.of(this).extension<PetIconColors>()!;
+  PetIconColors get petIconColors => Theme.of(this).extension<PetIconColors>()!;
+
+  PetTextFieldTheme get petTextFieldTheme =>
+      Theme.of(this).extension<PetTextFieldTheme>()!;
 }

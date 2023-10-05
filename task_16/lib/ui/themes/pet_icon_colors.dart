@@ -41,8 +41,7 @@ class PetIconColors extends ThemeExtension<PetIconColors> {
       activeBg: Color.lerp(activeBg, other.activeBg, t)!,
       activeFg: Color.lerp(activeFg, other.activeFg, t)!,
       inActiveBg: Color.lerp(inActiveBg, other.inActiveBg, t)!,
-      inActiveFg:
-          Color.lerp(inActiveFg, other.inActiveFg, t)!,
+      inActiveFg: Color.lerp(inActiveFg, other.inActiveFg, t)!,
     );
   }
 
@@ -52,5 +51,4 @@ class PetIconColors extends ThemeExtension<PetIconColors> {
     inActiveBg: AppColors.white,
     inActiveFg: AppColors.darkGrey,
   );
-
 }

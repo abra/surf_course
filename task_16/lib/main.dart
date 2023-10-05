@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'ui/themes/app_theme.dart';
 import 'ui/pages/pet_registration_page_widget.dart';
+import 'ui/themes/app_theme.dart';
 
 void main() {
   runApp(const PetHealthApp());
