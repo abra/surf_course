@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../components/pet_icon_radio_widget.dart';
 import '../components/pet_text_field_widget.dart';
+import '../themes/app_colors.dart';
 
 enum PetType {
   dog('Собака', 'assets/images/svg/dog.svg'),
@@ -32,37 +33,34 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 120),
+        padding: const EdgeInsets.only(left: 24, right: 24, top: 70),
         child: SizedBox(
           height: double.infinity,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: 100,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      PetType.dog,
-                      PetType.cat,
-                      PetType.parrot,
-                      PetType.hamster,
-                    ].map((petType) {
-                      return PetIconRadioWidget(
-                        value: petType,
-                        isSelected: _petType == petType,
-                        onChanged: (value) {
-                          setState(() {
-                            _petType = value;
-                          });
-                        },
-                      );
-                    }).toList(),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PetType.dog,
+                    PetType.cat,
+                    PetType.parrot,
+                    PetType.hamster,
+                  ].map((petType) {
+                    return PetIconRadioWidget(
+                      value: petType,
+                      isSelected: _petType == petType,
+                      onChanged: (value) {
+                        setState(() {
+                          _petType = value;
+                        });
+                      },
+                    );
+                  }).toList(),
                 ),
                 const SizedBox(
-                  height: 32,
+                  height: 24,
                   width: double.infinity,
                 ),
                 const SizedBox(height: 16),
@@ -108,14 +106,40 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                     return null;
                   },
                 ),
+                const SizedBox(height: 16),
+                PetTextFieldWidget(
+                  label: 'Почта хозяина',
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value != null) {
+                      final emailAddressPattern =
+                          RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                      if (emailAddressPattern.hasMatch(value)) {
+                        return null;
+                      } else {
+                        return 'Укажите почту хозяина';
+                      }
+                    }
+                    return null;
+                  },
+                ),
                 const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate() && _petType != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text(
                             'Питомец добавлен',
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          backgroundColor: AppColors.red,
+                          content: Text(
+                            'Питомец не добавлен',
                           ),
                         ),
                       );

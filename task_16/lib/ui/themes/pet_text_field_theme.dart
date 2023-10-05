@@ -42,8 +42,10 @@ class PetTextFieldTheme extends ThemeExtension<PetTextFieldTheme> {
     }
 
     return PetTextFieldTheme(
-      defaultInputStyle: TextStyle.lerp(defaultInputStyle, other.defaultInputStyle, t)!,
-      errorInputStyle: TextStyle.lerp(errorInputStyle, other.errorInputStyle, t)!,
+      defaultInputStyle:
+          TextStyle.lerp(defaultInputStyle, other.defaultInputStyle, t)!,
+      errorInputStyle:
+          TextStyle.lerp(errorInputStyle, other.errorInputStyle, t)!,
       defaultLabelStyle:
           TextStyle.lerp(defaultLabelStyle, other.defaultLabelStyle, t)!,
       errorLabelStyle:
