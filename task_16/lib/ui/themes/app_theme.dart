@@ -61,31 +61,31 @@ class AppTheme {
       fillColor: AppColors.white,
       border: UnderlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(16),
+          Radius.circular(12),
         ),
         borderSide: BorderSide.none,
       ),
       enabledBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(16),
+          Radius.circular(12),
         ),
         borderSide: BorderSide.none,
       ),
       focusedBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(16),
+          Radius.circular(12),
         ),
         borderSide: BorderSide.none,
       ),
       errorBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(16),
+          Radius.circular(12),
         ),
         borderSide: BorderSide.none,
       ),
       focusedErrorBorder: UnderlineInputBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(16),
+          Radius.circular(12),
         ),
         borderSide: BorderSide.none,
       ),

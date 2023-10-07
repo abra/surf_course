@@ -33,7 +33,7 @@ class PetIconRadioWidget<T extends PetType> extends StatelessWidget {
               ),
               child: Center(
                 child: SizedBox.square(
-                  dimension: 40,
+                  dimension: 32,
                   child: SvgPicture.asset(
                     value.petSvgIcon,
                     colorFilter: ColorFilter.mode(
