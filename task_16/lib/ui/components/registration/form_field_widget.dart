@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../themes/app_colors.dart';
 import '../../themes/extensions.dart';
 
-class BaseFormFieldWidget extends StatefulWidget {
-  const BaseFormFieldWidget({
+class FormFieldWidget extends StatefulWidget {
+  const FormFieldWidget({
     super.key,
     required this.label,
     required this.keyboardType,
@@ -22,10 +22,10 @@ class BaseFormFieldWidget extends StatefulWidget {
   final VoidCallback? onTap;
 
   @override
-  State<BaseFormFieldWidget> createState() => _BaseFormFieldWidgetState();
+  State<FormFieldWidget> createState() => _FormFieldWidgetState();
 }
 
-class _BaseFormFieldWidgetState extends State<BaseFormFieldWidget> {
+class _FormFieldWidgetState extends State<FormFieldWidget> {
   late final String? Function(String?)? _validator;
   late FocusNode _focusNode;
   String? _errorText;

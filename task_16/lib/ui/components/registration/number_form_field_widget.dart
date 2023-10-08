@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'base_form_field_widget.dart';
+import 'form_field_widget.dart';
 
 class NumberFormFieldWidget extends StatelessWidget {
   const NumberFormFieldWidget({
@@ -14,7 +14,7 @@ class NumberFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseFormFieldWidget(
+    return FormFieldWidget(
       label: label,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       validator: validator ?? _defaultValidator,

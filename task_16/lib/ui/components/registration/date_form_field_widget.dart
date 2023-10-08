@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'base_form_field_widget.dart';
+import 'form_field_widget.dart';
 
 class DateFormFieldWidget extends StatelessWidget {
   const DateFormFieldWidget({
@@ -17,7 +17,7 @@ class DateFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = TextEditingController();
 
-    return BaseFormFieldWidget(
+    return FormFieldWidget(
       label: label,
       keyboardType: TextInputType.datetime,
       validator: validator ?? _defaultValidator,

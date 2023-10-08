@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'base_form_field_widget.dart';
+import 'form_field_widget.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   const TextFormFieldWidget({
@@ -14,7 +14,7 @@ class TextFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseFormFieldWidget(
+    return FormFieldWidget(
       label: label,
       keyboardType: TextInputType.text,
       validator: validator ?? _defaultValidator,

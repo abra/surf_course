@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'base_form_field_widget.dart';
+import 'form_field_widget.dart';
 
 class EmailFormFieldWidget extends StatelessWidget {
   const EmailFormFieldWidget({
@@ -14,7 +14,7 @@ class EmailFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseFormFieldWidget(
+    return FormFieldWidget(
       label: label,
       keyboardType: TextInputType.emailAddress,
       validator: validator ?? _defaultValidator,
