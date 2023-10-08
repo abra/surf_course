@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../pages/pet_registration_page_widget.dart';
 import '../themes/extensions.dart';
 
-class PetIconRadioWidget<T extends PetType> extends StatelessWidget {
-  const PetIconRadioWidget({
+class IconRadioWidget<T extends PetType> extends StatelessWidget {
+  const IconRadioWidget({
     super.key,
     required this.value,
     required this.isSelected,

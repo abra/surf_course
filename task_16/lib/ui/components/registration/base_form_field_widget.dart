@@ -3,45 +3,43 @@ import 'package:flutter/material.dart';
 import '../../themes/app_colors.dart';
 import '../../themes/extensions.dart';
 
-class TextFormFieldWidget extends StatefulWidget {
-  const TextFormFieldWidget({
+class BaseFormFieldWidget extends StatefulWidget {
+  const BaseFormFieldWidget({
     super.key,
     required this.label,
+    required this.keyboardType,
     this.validator,
+    this.focusNode,
+    this.controller,
+    this.onTap,
   });
 
   final String label;
+  final TextInputType keyboardType;
   final String? Function(String?)? validator;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final VoidCallback? onTap;
 
   @override
-  State<TextFormFieldWidget> createState() => _TextFormFieldWidgetState();
+  State<BaseFormFieldWidget> createState() => _BaseFormFieldWidgetState();
 }
 
-class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
-  final TextInputType _keyboardType = TextInputType.text;
-  late final TextEditingController _controller;
+class _BaseFormFieldWidgetState extends State<BaseFormFieldWidget> {
   late final String? Function(String?)? _validator;
   late FocusNode _focusNode;
   String? _errorText;
 
-  String? _defaultValidator(String? value) {
-    value = value!.trim();
-    if (value.isEmpty || value.length < 3 || value.length >= 20) {
-      return 'Укажите имя питомца от 3 до 20 символов';
-    }
-    return null;
-  }
-
   void _onFocus() {
-    if (!_focusNode.hasFocus) {
+    if (!_focusNode.hasFocus && widget.controller != null) {
       setState(() {
-        _errorText = _validator!(_controller.text);
-        _controller.text = _controller.text.trim();
+        _errorText = _validator!(widget.controller!.text);
+        widget.controller!.text = widget.controller!.text.trim();
       });
     } else {
       setState(() {
         _errorText = null;
-        _controller.text = _controller.text.trim();
+        widget.controller!.text = widget.controller!.text.trim();
       });
     }
   }
@@ -49,16 +47,15 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
-    _focusNode = FocusNode();
+    _validator = widget.validator;
+    _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onFocus);
-    _validator = widget.validator ?? _defaultValidator;
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    widget.controller?.dispose();
     _focusNode.removeListener(_onFocus);
     _focusNode.dispose();
   }
@@ -66,10 +63,11 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      keyboardType: _keyboardType,
-      controller: _controller,
-      cursorColor: AppColors.darkGrey,
+      onTap: widget.onTap,
+      keyboardType: widget.keyboardType,
+      controller: widget.controller,
       focusNode: _focusNode,
+      cursorColor: AppColors.darkGrey,
       decoration: InputDecoration(
         labelText: widget.label,
         errorText: _errorText,

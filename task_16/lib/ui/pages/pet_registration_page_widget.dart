@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
-import '../components/pet_icon_radio_widget.dart';
-import '../components/pet_registration/date_form_field_widget.dart';
-import '../components/pet_registration/email_form_field_widget.dart';
-import '../components/pet_registration/number_form_field_widget.dart';
-import '../components/pet_registration/text_form_field_widget.dart';
+import '../components/icon_radio_widget.dart';
+import '../components/registration/form_fields.dart';
 
 enum PetType {
   dog('Собака', 'assets/images/svg/dog.svg'),
@@ -51,7 +46,7 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: PetType.values.map((petType) {
-                      return PetIconRadioWidget(
+                      return IconRadioWidget(
                         value: petType,
                         isSelected: _petType == petType,
                         onChanged: (value) {
@@ -63,21 +58,13 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                     }).toList(),
                   ),
                   const SizedBox(height: 24),
-                  const TextFormFieldWidget(
-                    label: 'Имя питомца',
-                  ),
+                  const TextFormFieldWidget(label: 'Имя питомца'),
                   const SizedBox(height: 16),
-                  const DateFormFieldWidget(
-                    label: 'День рождения питомца',
-                  ),
+                  const DateFormFieldWidget(label: 'День рождения питомца'),
                   const SizedBox(height: 16),
-                  const NumberFormFieldWidget(
-                    label: 'Вес, кг',
-                  ),
+                  const NumberFormFieldWidget(label: 'Вес, кг'),
                   const SizedBox(height: 16),
-                  const EmailFormFieldWidget(
-                    label: 'Почта хозяина',
-                  ),
+                  const EmailFormFieldWidget(label: 'Почта хозяина'),
                   const Spacer(),
                   const Padding(
                     padding: EdgeInsets.only(
