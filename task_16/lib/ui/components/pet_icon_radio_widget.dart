@@ -27,8 +27,8 @@ class PetIconRadioWidget<T extends PetType> extends StatelessWidget {
             child: DecoratedBox(
               decoration: BoxDecoration(
                 color: isSelected
-                    ? context.petIconColors.activeBg
-                    : context.petIconColors.inActiveBg,
+                    ? context.iconColors.activeBg
+                    : context.iconColors.inActiveBg,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Center(
@@ -38,8 +38,8 @@ class PetIconRadioWidget<T extends PetType> extends StatelessWidget {
                     value.petSvgIcon,
                     colorFilter: ColorFilter.mode(
                       isSelected
-                          ? context.petIconColors.activeFg
-                          : context.petIconColors.inActiveFg,
+                          ? context.iconColors.activeFg
+                          : context.iconColors.inActiveFg,
                       BlendMode.srcIn,
                     ),
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../themes/extensions.dart';
 import '../../themes/app_colors.dart';
+import '../../themes/extensions.dart';
 
 class EmailFormFieldWidget extends StatefulWidget {
   const EmailFormFieldWidget({
@@ -18,9 +18,9 @@ class EmailFormFieldWidget extends StatefulWidget {
 }
 
 class _EmailFormFieldWidgetState extends State<EmailFormFieldWidget> {
+  final TextInputType _keyboardType = TextInputType.emailAddress;
   late final TextEditingController _controller;
   late final String? Function(String?)? _validator;
-  final TextInputType _keyboardType = TextInputType.text;
   late FocusNode _focusNode;
   String? _errorText;
 
@@ -78,13 +78,13 @@ class _EmailFormFieldWidgetState extends State<EmailFormFieldWidget> {
         labelText: widget.label,
         errorText: _errorText,
         labelStyle: _errorText == null
-            ? context.petTextFieldTheme.defaultLabelStyle
-            : context.petTextFieldTheme.errorLabelStyle,
-        errorStyle: context.petTextFieldTheme.errorTextStyle,
+            ? context.textFieldTheme.defaultLabelStyle
+            : context.textFieldTheme.errorLabelStyle,
+        errorStyle: context.textFieldTheme.errorTextStyle,
       ),
       style: _errorText == null
-          ? context.petTextFieldTheme.defaultInputStyle
-          : context.petTextFieldTheme.errorInputStyle,
+          ? context.textFieldTheme.defaultInputStyle
+          : context.textFieldTheme.errorInputStyle,
       validator: _validator,
     );
   }

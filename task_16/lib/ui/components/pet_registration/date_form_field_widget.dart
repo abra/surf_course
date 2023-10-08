@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../themes/extensions.dart';
 import '../../themes/app_colors.dart';
+import '../../themes/extensions.dart';
 
 class DateFormFieldWidget extends StatefulWidget {
   const DateFormFieldWidget({
@@ -19,9 +19,9 @@ class DateFormFieldWidget extends StatefulWidget {
 }
 
 class _DateFormFieldWidgetState extends State<DateFormFieldWidget> {
+  final TextInputType _keyboardType = TextInputType.datetime;
   late final TextEditingController _controller;
   late final String? Function(String?)? _validator;
-  final TextInputType _keyboardType = TextInputType.datetime;
   late FocusNode _focusNode;
   String? _errorText;
 
@@ -79,6 +79,7 @@ class _DateFormFieldWidgetState extends State<DateFormFieldWidget> {
     super.dispose();
     _controller.dispose();
     _focusNode.removeListener(_onFocus);
+    _focusNode.dispose();
   }
 
   @override
@@ -93,13 +94,13 @@ class _DateFormFieldWidgetState extends State<DateFormFieldWidget> {
         labelText: widget.label,
         errorText: _errorText,
         labelStyle: _errorText == null
-            ? context.petTextFieldTheme.defaultLabelStyle
-            : context.petTextFieldTheme.errorLabelStyle,
-        errorStyle: context.petTextFieldTheme.errorTextStyle,
+            ? context.textFieldTheme.defaultLabelStyle
+            : context.textFieldTheme.errorLabelStyle,
+        errorStyle: context.textFieldTheme.errorTextStyle,
       ),
       style: _errorText == null
-          ? context.petTextFieldTheme.defaultInputStyle
-          : context.petTextFieldTheme.errorInputStyle,
+          ? context.textFieldTheme.defaultInputStyle
+          : context.textFieldTheme.errorInputStyle,
       validator: _validator,
     );
   }

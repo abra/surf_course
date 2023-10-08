@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-class PetTextFieldTheme extends ThemeExtension<PetTextFieldTheme> {
-  const PetTextFieldTheme({
+class TextFieldTheme extends ThemeExtension<TextFieldTheme> {
+  const TextFieldTheme({
     required this.defaultInputStyle,
     required this.errorInputStyle,
     required this.defaultLabelStyle,
@@ -18,14 +18,14 @@ class PetTextFieldTheme extends ThemeExtension<PetTextFieldTheme> {
   final TextStyle errorTextStyle;
 
   @override
-  ThemeExtension<PetTextFieldTheme> copyWith({
+  ThemeExtension<TextFieldTheme> copyWith({
     TextStyle? defaultInputStyle,
     TextStyle? errorInputStyle,
     TextStyle? defaultLabelStyle,
     TextStyle? errorLabelStyle,
     TextStyle? errorTextStyle,
   }) {
-    return PetTextFieldTheme(
+    return TextFieldTheme(
       defaultInputStyle: defaultInputStyle ?? this.defaultInputStyle,
       errorInputStyle: errorInputStyle ?? this.errorInputStyle,
       defaultLabelStyle: defaultLabelStyle ?? this.defaultLabelStyle,
@@ -35,13 +35,13 @@ class PetTextFieldTheme extends ThemeExtension<PetTextFieldTheme> {
   }
 
   @override
-  ThemeExtension<PetTextFieldTheme> lerp(
-      covariant ThemeExtension<PetTextFieldTheme>? other, double t) {
-    if (other is! PetTextFieldTheme) {
+  ThemeExtension<TextFieldTheme> lerp(
+      covariant ThemeExtension<TextFieldTheme>? other, double t) {
+    if (other is! TextFieldTheme) {
       return this;
     }
 
-    return PetTextFieldTheme(
+    return TextFieldTheme(
       defaultInputStyle:
           TextStyle.lerp(defaultInputStyle, other.defaultInputStyle, t)!,
       errorInputStyle:
@@ -54,7 +54,7 @@ class PetTextFieldTheme extends ThemeExtension<PetTextFieldTheme> {
     );
   }
 
-  static const styles = PetTextFieldTheme(
+  static const styles = TextFieldTheme(
     defaultInputStyle: TextStyle(
       color: AppColors.darkGrey,
       fontSize: 16,

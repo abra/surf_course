@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-class PetIconColors extends ThemeExtension<PetIconColors> {
-  const PetIconColors({
+class IconColors extends ThemeExtension<IconColors> {
+  const IconColors({
     required this.activeBg,
     required this.activeFg,
     required this.inActiveBg,
@@ -16,13 +16,13 @@ class PetIconColors extends ThemeExtension<PetIconColors> {
   final Color inActiveFg;
 
   @override
-  ThemeExtension<PetIconColors> copyWith({
+  ThemeExtension<IconColors> copyWith({
     Color? activeBg,
     Color? activeFg,
     Color? inActiveBg,
     Color? inActiveFg,
   }) {
-    return PetIconColors(
+    return IconColors(
       activeBg: activeBg ?? this.activeBg,
       activeFg: activeFg ?? this.activeFg,
       inActiveBg: inActiveBg ?? this.inActiveBg,
@@ -31,13 +31,13 @@ class PetIconColors extends ThemeExtension<PetIconColors> {
   }
 
   @override
-  ThemeExtension<PetIconColors> lerp(
-      covariant ThemeExtension<PetIconColors>? other, double t) {
-    if (other is! PetIconColors) {
+  ThemeExtension<IconColors> lerp(
+      covariant ThemeExtension<IconColors>? other, double t) {
+    if (other is! IconColors) {
       return this;
     }
 
-    return PetIconColors(
+    return IconColors(
       activeBg: Color.lerp(activeBg, other.activeBg, t)!,
       activeFg: Color.lerp(activeFg, other.activeFg, t)!,
       inActiveBg: Color.lerp(inActiveBg, other.inActiveBg, t)!,
@@ -45,7 +45,7 @@ class PetIconColors extends ThemeExtension<PetIconColors> {
     );
   }
 
-  static const colors = PetIconColors(
+  static const colors = IconColors(
     activeBg: AppColors.lightRed,
     activeFg: AppColors.white,
     inActiveBg: AppColors.white,

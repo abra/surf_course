@@ -18,11 +18,11 @@ class NumberFormFieldWidget extends StatefulWidget {
 }
 
 class _NumberFormFieldWidgetState extends State<NumberFormFieldWidget> {
-  late final TextEditingController _controller;
-  late final String? Function(String?)? _validator;
   final TextInputType _keyboardType = const TextInputType.numberWithOptions(
     decimal: true,
   );
+  late final TextEditingController _controller;
+  late final String? Function(String?)? _validator;
   late FocusNode _focusNode;
   String? _errorText;
 
@@ -77,13 +77,13 @@ class _NumberFormFieldWidgetState extends State<NumberFormFieldWidget> {
         labelText: widget.label,
         errorText: _errorText,
         labelStyle: _errorText == null
-            ? context.petTextFieldTheme.defaultLabelStyle
-            : context.petTextFieldTheme.errorLabelStyle,
-        errorStyle: context.petTextFieldTheme.errorTextStyle,
+            ? context.textFieldTheme.defaultLabelStyle
+            : context.textFieldTheme.errorLabelStyle,
+        errorStyle: context.textFieldTheme.errorTextStyle,
       ),
       style: _errorText == null
-          ? context.petTextFieldTheme.defaultInputStyle
-          : context.petTextFieldTheme.errorInputStyle,
+          ? context.textFieldTheme.defaultInputStyle
+          : context.textFieldTheme.errorInputStyle,
       validator: _validator,
     );
   }

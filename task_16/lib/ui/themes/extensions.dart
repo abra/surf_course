@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'pet_icon_colors.dart';
-import 'pet_text_field_theme.dart';
+import 'icon_colors.dart';
+import 'text_field_theme.dart';
 
 extension BuildContextExt on BuildContext {
   ThemeData get appTheme => Theme.of(this);
 
-  PetIconColors get petIconColors => Theme.of(this).extension<PetIconColors>()!;
+  IconColors get iconColors => Theme.of(this).extension<IconColors>()!;
 
-  PetTextFieldTheme get petTextFieldTheme =>
-      Theme.of(this).extension<PetTextFieldTheme>()!;
+  TextFieldTheme get textFieldTheme =>
+      Theme.of(this).extension<TextFieldTheme>()!;
 }

@@ -31,7 +31,6 @@ class PetRegistrationPageWidget extends StatefulWidget {
 class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
   final _formKey = GlobalKey<FormState>();
   final double _topPadding = 84;
-  final double _verticalSpacing = 16;
   PetType _petType = PetType.values.first;
 
   @override
@@ -39,7 +38,6 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
     return Form(
       key: _formKey,
       child: LayoutBuilder(builder: (context, constraints) {
-        log('LayoutBuilder constraints: ${constraints.maxHeight}');
         return SingleChildScrollView(
           padding: EdgeInsets.only(left: 24, right: 24, top: _topPadding),
           child: ConstrainedBox(
@@ -68,27 +66,27 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                   const TextFormFieldWidget(
                     label: 'Имя питомца',
                   ),
-                  SizedBox(height: _verticalSpacing),
+                  const SizedBox(height: 16),
                   const DateFormFieldWidget(
                     label: 'День рождения питомца',
                   ),
-                  SizedBox(height: _verticalSpacing),
+                  const SizedBox(height: 16),
                   const NumberFormFieldWidget(
                     label: 'Вес, кг',
                   ),
-                  SizedBox(height: _verticalSpacing),
+                  const SizedBox(height: 16),
                   const EmailFormFieldWidget(
                     label: 'Почта хозяина',
                   ),
                   const Spacer(),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(
-                      top: _verticalSpacing,
-                      bottom: 30,
+                      top: 16,
+                      bottom: 24,
                       left: 24,
                       right: 24,
                     ),
-                    child: const ElevatedButton(
+                    child: ElevatedButton(
                       key: ValueKey('addPet'),
                       onPressed: null,
                       // onPressed: () {

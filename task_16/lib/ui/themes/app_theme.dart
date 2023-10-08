@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
-import 'pet_icon_colors.dart';
-import 'pet_text_field_theme.dart';
+import 'icon_colors.dart';
+import 'text_field_theme.dart';
 
 class AppTheme {
   static ThemeData appTheme = ThemeData(
@@ -102,8 +102,8 @@ class AppTheme {
       ),
     ),
     extensions: const [
-      PetIconColors.colors,
-      PetTextFieldTheme.styles,
+      IconColors.colors,
+      TextFieldTheme.styles,
     ],
   );
 }

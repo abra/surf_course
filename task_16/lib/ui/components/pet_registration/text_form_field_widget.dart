@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../themes/extensions.dart';
 import '../../themes/app_colors.dart';
+import '../../themes/extensions.dart';
 
 class TextFormFieldWidget extends StatefulWidget {
   const TextFormFieldWidget({
@@ -18,9 +18,9 @@ class TextFormFieldWidget extends StatefulWidget {
 }
 
 class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
+  final TextInputType _keyboardType = TextInputType.text;
   late final TextEditingController _controller;
   late final String? Function(String?)? _validator;
-  final TextInputType _keyboardType = TextInputType.text;
   late FocusNode _focusNode;
   String? _errorText;
 
@@ -74,13 +74,13 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
         labelText: widget.label,
         errorText: _errorText,
         labelStyle: _errorText == null
-            ? context.petTextFieldTheme.defaultLabelStyle
-            : context.petTextFieldTheme.errorLabelStyle,
-        errorStyle: context.petTextFieldTheme.errorTextStyle,
+            ? context.textFieldTheme.defaultLabelStyle
+            : context.textFieldTheme.errorLabelStyle,
+        errorStyle: context.textFieldTheme.errorTextStyle,
       ),
       style: _errorText == null
-          ? context.petTextFieldTheme.defaultInputStyle
-          : context.petTextFieldTheme.errorInputStyle,
+          ? context.textFieldTheme.defaultInputStyle
+          : context.textFieldTheme.errorInputStyle,
       validator: _validator,
     );
   }
