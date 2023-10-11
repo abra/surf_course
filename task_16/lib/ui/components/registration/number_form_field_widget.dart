@@ -17,6 +17,7 @@ class NumberFormFieldWidget extends StatelessWidget {
     return FormFieldWidget(
       label: label,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      focusNode: FocusNode(),
       validator: validator ?? _defaultValidator,
       controller: TextEditingController(),
     );

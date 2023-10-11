@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../../themes/app_colors.dart';
-import '../../themes/extensions.dart';
+import '/ui/themes/app_colors.dart';
+import '/ui/themes/extensions.dart';
 
 class FormFieldWidget extends StatefulWidget {
   const FormFieldWidget({
     super.key,
     required this.label,
-    required this.keyboardType,
+    required this.controller,
     this.validator,
+    this.keyboardType,
     this.focusNode,
-    this.controller,
     this.onTap,
   });
 
   final String label;
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final FocusNode? focusNode;
-  final TextEditingController? controller;
+  final TextEditingController controller;
   final VoidCallback? onTap;
 
   @override
@@ -26,20 +26,32 @@ class FormFieldWidget extends StatefulWidget {
 }
 
 class _FormFieldWidgetState extends State<FormFieldWidget> {
-  late final String? Function(String?)? _validator;
-  late FocusNode _focusNode;
+  late final FocusNode _focusNode;
   String? _errorText;
+  int _callCount = 0;
 
   void _onFocus() {
-    if (!_focusNode.hasFocus && widget.controller != null) {
-      setState(() {
-        _errorText = _validator!(widget.controller!.text);
-        widget.controller!.text = widget.controller!.text.trim();
-      });
-    } else {
-      setState(() {
+    // TODO: Очень пахнущий код, надо пофиксить
+    if (_focusNode.runtimeType == FocusNode) {
+      if (!_focusNode.hasFocus) {
+        _errorText = widget.validator!(widget.controller.text);
+        setState(() {
+          widget.controller.text = widget.controller.text.trim();
+        });
+      } else {
         _errorText = null;
-        widget.controller!.text = widget.controller!.text.trim();
+        setState(() {
+          widget.controller.text = widget.controller.text.trim();
+        });
+      }
+    } else {
+      if (_callCount < 2) {
+        _callCount++;
+        return;
+      }
+      _errorText = widget.validator!(widget.controller.text);
+      setState(() {
+        widget.controller.text = widget.controller.text.trim();
       });
     }
   }
@@ -47,7 +59,6 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
   @override
   void initState() {
     super.initState();
-    _validator = widget.validator;
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onFocus);
   }
@@ -55,7 +66,7 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
   @override
   void dispose() {
     super.dispose();
-    widget.controller?.dispose();
+    widget.controller.dispose();
     _focusNode.removeListener(_onFocus);
     _focusNode.dispose();
   }
@@ -79,7 +90,7 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
       style: _errorText == null
           ? context.textFieldTheme.defaultInputStyle
           : context.textFieldTheme.errorInputStyle,
-      validator: _validator,
+      validator: widget.validator,
     );
   }
 }

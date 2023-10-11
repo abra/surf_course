@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../pages/pet_registration_page_widget.dart';
-import '../themes/extensions.dart';
+import '/data/pet_type.dart';
+import '/ui/themes/extensions.dart';
 
 class IconRadioWidget<T extends PetType> extends StatelessWidget {
   const IconRadioWidget({
@@ -49,7 +49,10 @@ class IconRadioWidget<T extends PetType> extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Text(value.petName),
+        Text(
+          value.petName,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
       ],
     );
   }

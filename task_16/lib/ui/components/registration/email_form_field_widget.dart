@@ -17,6 +17,7 @@ class EmailFormFieldWidget extends StatelessWidget {
     return FormFieldWidget(
       label: label,
       keyboardType: TextInputType.emailAddress,
+      focusNode: FocusNode(),
       validator: validator ?? _defaultValidator,
       controller: TextEditingController(),
     );

@@ -17,6 +17,7 @@ class TextFormFieldWidget extends StatelessWidget {
     return FormFieldWidget(
       label: label,
       keyboardType: TextInputType.text,
+      focusNode: FocusNode(),
       validator: validator ?? _defaultValidator,
       controller: TextEditingController(),
     );
