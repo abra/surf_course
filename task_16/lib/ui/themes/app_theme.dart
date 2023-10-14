@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:surf_flutter_courses_template/ui/themes/form_submit_button_theme.dart';
 
 import 'app_colors.dart';
 import 'icon_colors.dart';
@@ -61,6 +62,17 @@ class AppTheme {
       yearStyle: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        alignment: Alignment.center,
+        side: MaterialStateProperty.all(BorderSide.none),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
       ),
     ),
     inputDecorationTheme: const InputDecorationTheme(
@@ -137,9 +149,10 @@ class AppTheme {
         fontWeight: FontWeight.w400,
       ),
     ),
-    extensions: const [
+    extensions: [
       IconColors.colors,
       TextFieldTheme.styles,
+      FormSubmitButtonTheme.buttonTheme,
     ],
   );
 }

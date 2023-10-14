@@ -25,7 +25,7 @@ class EmailFormFieldWidget extends StatelessWidget {
 
   String? _defaultValidator(String? value) {
     if (value != null) {
-      final emailAddressPattern = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+      final emailAddressPattern = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
       if (emailAddressPattern.hasMatch(value)) {
         return null;
       } else {

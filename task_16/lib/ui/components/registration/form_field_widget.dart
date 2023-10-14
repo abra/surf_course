@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '/ui/form_model.dart';
 import '/ui/themes/app_colors.dart';
 import '/ui/themes/extensions.dart';
 
@@ -27,33 +29,33 @@ class FormFieldWidget extends StatefulWidget {
 
 class _FormFieldWidgetState extends State<FormFieldWidget> {
   late final FocusNode _focusNode;
+  late FormModel _formModel;
   String? _errorText;
   int _callCount = 0;
+  bool _formFieldIsReady = false;
+
+  void _updateStatus(String text) {
+    _errorText = widget.validator!(text);
+    _formFieldIsReady = _errorText == null && widget.controller.text.isNotEmpty;
+    _formModel.addData(hashCode, _formFieldIsReady);
+  }
 
   void _onFocus() {
-    // TODO: Очень пахнущий код, надо пофиксить
     if (_focusNode.runtimeType == FocusNode) {
       if (!_focusNode.hasFocus) {
-        _errorText = widget.validator!(widget.controller.text);
-        setState(() {
-          widget.controller.text = widget.controller.text.trim();
-        });
-      } else {
-        _errorText = null;
-        setState(() {
-          widget.controller.text = widget.controller.text.trim();
-        });
+        _updateStatus(widget.controller.text);
       }
     } else {
       if (_callCount < 2) {
         _callCount++;
         return;
       }
-      _errorText = widget.validator!(widget.controller.text);
-      setState(() {
-        widget.controller.text = widget.controller.text.trim();
-      });
+      _updateStatus(widget.controller.text);
     }
+
+    setState(() {
+      widget.controller.text = widget.controller.text.trim();
+    });
   }
 
   @override
@@ -61,11 +63,18 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
     super.initState();
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onFocus);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _formModel = Provider.of<FormModel>(context, listen: false);
+      _formModel.addData(hashCode, _formFieldIsReady);
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
+    Future.delayed(Duration.zero, () {
+      _formModel.removeData(hashCode);
+    });
     widget.controller.dispose();
     _focusNode.removeListener(_onFocus);
     _focusNode.dispose();
@@ -74,6 +83,9 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: (value) {
+        _updateStatus(value);
+      },
       onTap: widget.onTap,
       keyboardType: widget.keyboardType,
       controller: widget.controller,

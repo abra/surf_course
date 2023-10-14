@@ -26,6 +26,14 @@ class IconRadioWidget<T extends PetType> extends StatelessWidget {
             dimension: 72,
             child: DecoratedBox(
               decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color.fromRGBO(196, 196, 196, 0.24),
+                    offset: Offset(0, 18),
+                    blurRadius: 16,
+                    spreadRadius: -8,
+                  ),
+                ],
                 color: isSelected
                     ? context.iconColors.activeBg
                     : context.iconColors.inActiveBg,

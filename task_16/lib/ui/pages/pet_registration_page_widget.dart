@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '/common/extensions.dart';
 import '/data/pet_type.dart';
@@ -8,57 +9,36 @@ import '/data/vaccine_type.dart';
 import '/ui/components/icon_radio_widget.dart';
 import '/ui/components/registration/checkbox_form_field_widget.dart';
 import '/ui/components/registration/form_fields.dart';
+import '/ui/form_model.dart';
+import '/ui/themes/extensions.dart';
 
 class PetRegistrationPageWidget extends StatefulWidget {
   const PetRegistrationPageWidget({super.key});
 
   @override
   State<PetRegistrationPageWidget> createState() =>
-      _PetRegistrationPageWidgetState();
+      PetRegistrationPageWidgetState();
 }
 
-class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
+class PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
   final _formKey = GlobalKey<FormState>();
   final double _topPadding = 84;
-  final List<VaccineType> _vaccines = [];
+
   PetType _petType = PetType.values.first;
-
-  final _formFields = const <Widget>[
-    TextFormFieldWidget(label: 'Имя питомца'),
-    SizedBox(height: 16),
-    DateFormFieldWidget(label: 'День рождения питомца'),
-    SizedBox(height: 16),
-    NumberFormFieldWidget(label: 'Вес, кг'),
-    SizedBox(height: 16),
-    EmailFormFieldWidget(label: 'Почта хозяина'),
-  ];
-
-  bool _isVaccinated(VaccineType vaccineType) =>
-      _vaccines.contains(vaccineType);
-
-  void _toggleVaccination(VaccineType vaccineType) {
-    setState(() {
-      _vaccines.contains(vaccineType)
-          ? _vaccines.remove(vaccineType)
-          : _vaccines.add(vaccineType);
-    });
-  }
-
-  void _clearVaccinations(PetType petType) {
-    if (petType == PetType.dog || petType == PetType.cat) {
-      setState(() {
-        _vaccines.clear();
-      });
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final formModel = context.watch<FormModel>();
+
     return Form(
       key: _formKey,
       child: LayoutBuilder(builder: (context, constraints) {
         return SingleChildScrollView(
-          padding: EdgeInsets.only(left: 24, right: 24, top: _topPadding),
+          padding: EdgeInsets.only(
+            left: 24,
+            right: 24,
+            top: _topPadding,
+          ),
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: constraints.maxHeight - _topPadding,
@@ -74,8 +54,8 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                         value: petType,
                         isSelected: _petType == petType,
                         onChanged: (value) {
+                          formModel.clearVaccinations(petType);
                           setState(() {
-                            _clearVaccinations(petType);
                             _petType = value;
                           });
                         },
@@ -83,7 +63,13 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                     }).toList(),
                   ),
                   const SizedBox(height: 24),
-                  ..._formFields,
+                  const TextFormFieldWidget(label: 'Имя питомца'),
+                  const SizedBox(height: 16),
+                  const DateFormFieldWidget(label: 'День рождения питомца'),
+                  const SizedBox(height: 16),
+                  const NumberFormFieldWidget(label: 'Вес, кг'),
+                  const SizedBox(height: 16),
+                  const EmailFormFieldWidget(label: 'Почта хозяина'),
                   const SizedBox(height: 24),
                   AnimatedOpacity(
                     opacity: _petType.isCatOrDog ? 1 : 0,
@@ -103,10 +89,12 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                             const SizedBox(height: 16),
                             ...VaccineType.values.map((vaccineType) {
                               return CheckboxFormFieldWidget(
-                                isVaccinated: _isVaccinated(vaccineType),
+                                isVaccinated: formModel.isVaccinated(
+                                  vaccineType,
+                                ),
                                 onChanged: (value) {
                                   if (value != null) {
-                                    _toggleVaccination(vaccineType);
+                                    formModel.toggleVaccination(vaccineType);
                                   }
                                 },
                                 label: vaccineType.label,
@@ -123,42 +111,28 @@ class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(
-                      bottom: 24,
-                      left: 24,
-                      right: 24,
+                      bottom: 34,
                     ),
-                    child: ElevatedButton(
-                      key: const ValueKey('register-pet-button'),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          log('petType: $_petType');
-                          log('formKey: ${_formKey.currentState!.validate()}');
-                        } else {
-                          log('formKey: ${_formKey.currentState!.validate()}');
-                        }
-                      },
-                      // onPressed: () {
-                      //   if (_formKey.currentState!.validate()) {
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //       const SnackBar(
-                      //         content: Text(
-                      //           'Питомец добавлен',
-                      //         ),
-                      //       ),
-                      //     );
-                      //   } else {
-                      //     ScaffoldMessenger.of(context).showSnackBar(
-                      //       const SnackBar(
-                      //         backgroundColor: AppColors.red,
-                      //         content: Text(
-                      //           'Питомец не добавлен',
-                      //         ),
-                      //       ),
-                      //     );
-                      //   }
-                      // },
-                      child: const Text(
-                        'Добавить',
+                    child: SizedBox(
+                      height: 56,
+                      width: double.infinity,
+                      child: Consumer<FormModel>(
+                        builder: (context, formModel, _) {
+                          return ElevatedButton(
+                            style: formModel.isReadyForSubmit
+                                ? context.elevatedButtonTheme.active.style
+                                : context.elevatedButtonTheme.inActive.style,
+                            key: const ValueKey('register-pet-button'),
+                            onPressed: formModel.isReadyForSubmit
+                                ? () {
+                                    log('submitted');
+                                  }
+                                : null,
+                            child: const Text(
+                              'Отправить',
+                            ),
+                          );
+                        },
                       ),
                     ),
                   )
