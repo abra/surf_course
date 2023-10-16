@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,20 +5,20 @@ import '/common/extensions.dart';
 import '/data/pet_type.dart';
 import '/data/vaccine_type.dart';
 import '/ui/components/icon_radio_widget.dart';
-import '/ui/components/registration/checkbox_form_field_widget.dart';
-import '/ui/components/registration/form_fields.dart';
+import '/ui/components/pet_registration_form/checkbox_form_field_widget.dart';
+import '/ui/components/pet_registration_form/form_fields.dart';
 import '/ui/form_model.dart';
-import '/ui/themes/extensions.dart';
+import '../components/pet_registration_form/submit_form_button_widget.dart';
 
 class PetRegistrationPageWidget extends StatefulWidget {
   const PetRegistrationPageWidget({super.key});
 
   @override
   State<PetRegistrationPageWidget> createState() =>
-      PetRegistrationPageWidgetState();
+      _PetRegistrationPageWidgetState();
 }
 
-class PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
+class _PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
   final _formKey = GlobalKey<FormState>();
   final double _topPadding = 84;
 
@@ -110,32 +108,11 @@ class PetRegistrationPageWidgetState extends State<PetRegistrationPageWidget> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 34,
+                    padding: const EdgeInsets.only(bottom: 34),
+                    child: SubmitFormButtonWidget(
+                      formKey: _formKey,
                     ),
-                    child: SizedBox(
-                      height: 56,
-                      width: double.infinity,
-                      child: Consumer<FormModel>(
-                        builder: (context, formModel, _) {
-                          return ElevatedButton(
-                            style: formModel.isReadyForSubmit
-                                ? context.elevatedButtonTheme.active.style
-                                : context.elevatedButtonTheme.inActive.style,
-                            key: const ValueKey('register-pet-button'),
-                            onPressed: formModel.isReadyForSubmit
-                                ? () {
-                                    log('submitted');
-                                  }
-                                : null,
-                            child: const Text(
-                              'Отправить',
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  )
+                  ),
                 ],
               ),
             ),

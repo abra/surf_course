@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '/common/extensions.dart';
-import '/ui/components/registration/nokeyboard_editable_text_focusnode.dart';
+import '/ui/components/pet_registration_form/nokeyboard_editable_text_focusnode.dart';
 import 'form_field_widget.dart';
 
 class DateFormFieldWidget extends StatelessWidget {

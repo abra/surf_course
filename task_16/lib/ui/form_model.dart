@@ -7,9 +7,12 @@ class FormModel with ChangeNotifier {
   final Map<int, bool> formData = {};
   final List<VaccineType> vaccines = [];
   int? hashCodeToRemove;
+  bool isSubmitted = false;
+  bool _isReadyForSubmit = false;
 
   void addData(int key, bool value) {
     formData[key] = value;
+    isReadyForSubmit = !formData.values.contains(false);
     notifyListeners();
   }
 
@@ -17,14 +20,33 @@ class FormModel with ChangeNotifier {
     if (formData.containsKey(key)) {
       formData.remove(key);
     }
+    isReadyForSubmit = !formData.values.contains(false);
+    notifyListeners();
+  }
+
+  set isReadyForSubmit(bool value) {
+    _isReadyForSubmit = value;
     notifyListeners();
   }
 
   bool get isReadyForSubmit {
-    if (formData.isEmpty) {
-      return false;
-    }
-    return !formData.values.contains(false);
+    return _isReadyForSubmit;
+  }
+
+  // bool get isReadyForSubmit {
+  //   if (formData.isEmpty) {
+  //     return false;
+  //   }
+  //   return !formData.values.contains(false);
+  // }
+
+  set formSubmitted(bool value) {
+    isSubmitted = value;
+    notifyListeners();
+  }
+
+  bool get formSubmitted {
+    return isSubmitted;
   }
 
   void toggleVaccination(VaccineType vaccineType) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +36,8 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
   int _callCount = 0;
   bool _formFieldIsReady = false;
 
-  void _updateStatus(String text) {
-    _errorText = widget.validator!(text);
+  void _updateStatus(String value) {
+    _errorText = widget.validator!(value);
     _formFieldIsReady = _errorText == null && widget.controller.text.isNotEmpty;
     _formModel.addData(hashCode, _formFieldIsReady);
   }
@@ -61,10 +63,10 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
   @override
   void initState() {
     super.initState();
+    _formModel = Provider.of<FormModel>(context, listen: false);
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_onFocus);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _formModel = Provider.of<FormModel>(context, listen: false);
       _formModel.addData(hashCode, _formFieldIsReady);
     });
   }
@@ -82,11 +84,16 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final formModel = context.watch<FormModel>();
+
     return TextFormField(
+      enabled: formModel.formSubmitted ? false : true,
       onChanged: (value) {
-        _updateStatus(value);
+        _errorText = widget.validator!(value);
+          _formFieldIsReady =
+              _errorText == null && widget.controller.text.isNotEmpty;
       },
-      onTap: widget.onTap,
+      onTap: formModel.formSubmitted ? null : widget.onTap,
       keyboardType: widget.keyboardType,
       controller: widget.controller,
       focusNode: _focusNode,

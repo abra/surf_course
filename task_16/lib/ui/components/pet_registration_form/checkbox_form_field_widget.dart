@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '/ui/form_model.dart';
 import '/ui/themes/extensions.dart';
 
 class CheckboxFormFieldWidget extends StatelessWidget {
@@ -18,8 +20,10 @@ class CheckboxFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formModel = context.watch<FormModel>();
+
     return GestureDetector(
-      onTap: () => onChanged(!isVaccinated),
+      onTap: formModel.formSubmitted ? null : () => onChanged(!isVaccinated),
       child: SizedBox(
         width: double.infinity,
         child: Column(
@@ -30,17 +34,20 @@ class CheckboxFormFieldWidget extends StatelessWidget {
                 SizedBox(
                   width: 22,
                   height: 22,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: context.iconColors.inActiveBg,
-                      borderRadius: BorderRadius.circular(8),
-                      border: null,
-                    ),
-                    child: Transform.scale(
-                      scale: 1.3,
-                      child: Checkbox(
-                        value: isVaccinated,
-                        onChanged: onChanged,
+                  child: Opacity(
+                    opacity: formModel.formSubmitted ? 0.5 : 1.0,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: context.iconColors.inActiveBg,
+                        borderRadius: BorderRadius.circular(8),
+                        border: null,
+                      ),
+                      child: Transform.scale(
+                        scale: 1.3,
+                        child: Checkbox(
+                          value: isVaccinated,
+                          onChanged: formModel.formSubmitted ? null : onChanged,
+                        ),
                       ),
                     ),
                   ),
