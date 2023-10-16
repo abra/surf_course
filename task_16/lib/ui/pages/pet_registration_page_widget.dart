@@ -7,8 +7,8 @@ import '/data/vaccine_type.dart';
 import '/ui/components/icon_radio_widget.dart';
 import '/ui/components/pet_registration_form/checkbox_form_field_widget.dart';
 import '/ui/components/pet_registration_form/form_fields.dart';
-import '/ui/form_model.dart';
-import '../components/pet_registration_form/submit_form_button_widget.dart';
+import '/ui/components/pet_registration_form/submit_form_button_widget.dart';
+import '/ui/models/form_model.dart';
 
 class PetRegistrationPageWidget extends StatefulWidget {
   const PetRegistrationPageWidget({super.key});

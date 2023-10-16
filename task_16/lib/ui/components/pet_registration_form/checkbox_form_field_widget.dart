@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/ui/form_model.dart';
+import '/ui/models/form_model.dart';
 import '/ui/themes/extensions.dart';
 
 class CheckboxFormFieldWidget extends StatelessWidget {

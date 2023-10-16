@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import '/data/pet_type.dart';
+import '/ui/models/form_model.dart';
 import '/ui/themes/extensions.dart';
-import '../form_model.dart';
 
 class IconRadioWidget<T extends PetType> extends StatelessWidget {
   const IconRadioWidget({

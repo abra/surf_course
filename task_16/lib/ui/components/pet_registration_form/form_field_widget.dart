@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '/ui/form_model.dart';
+import '/ui/models/form_model.dart';
 import '/ui/themes/app_colors.dart';
 import '/ui/themes/extensions.dart';
 
@@ -90,8 +88,8 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
       enabled: formModel.formSubmitted ? false : true,
       onChanged: (value) {
         _errorText = widget.validator!(value);
-          _formFieldIsReady =
-              _errorText == null && widget.controller.text.isNotEmpty;
+        _formFieldIsReady =
+            _errorText == null && widget.controller.text.isNotEmpty;
       },
       onTap: formModel.formSubmitted ? null : widget.onTap,
       keyboardType: widget.keyboardType,
