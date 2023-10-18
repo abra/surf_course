@@ -21,6 +21,9 @@ class IconRadioWidget<T extends PetType> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formModel = context.watch<FormModel>();
+    Color iconSelected = isSelected
+        ? context.iconColors.activeBg
+        : context.iconColors.inActiveBg;
 
     return Column(
       children: [
@@ -42,9 +45,7 @@ class IconRadioWidget<T extends PetType> extends StatelessWidget {
                       spreadRadius: -8,
                     ),
                   ],
-                  color: isSelected
-                      ? context.iconColors.activeBg
-                      : context.iconColors.inActiveBg,
+                  color: iconSelected,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Center(
