@@ -6,9 +6,9 @@ import 'form_field_widget.dart';
 
 class DateFormFieldWidget extends StatelessWidget {
   const DateFormFieldWidget({
-    super.key,
-    required this.label,
     this.validator,
+    required this.label,
+    super.key,
   });
 
   final String label;
