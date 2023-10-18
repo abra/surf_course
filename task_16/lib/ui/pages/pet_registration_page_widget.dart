@@ -6,8 +6,11 @@ import '/data/pet_type.dart';
 import '/data/vaccine_type.dart';
 import '/ui/components/icon_radio_widget.dart';
 import '/ui/components/pet_registration_form/checkbox_form_field_widget.dart';
-import '/ui/components/pet_registration_form/form_fields.dart';
+import '/ui/components/pet_registration_form/date_form_field_widget.dart';
+import '/ui/components/pet_registration_form/email_form_field_widget.dart';
+import '/ui/components/pet_registration_form/number_form_field_widget.dart';
 import '/ui/components/pet_registration_form/submit_form_button_widget.dart';
+import '/ui/components/pet_registration_form/text_form_field_widget.dart';
 import '/ui/models/form_model.dart';
 
 class PetRegistrationPageWidget extends StatefulWidget {
