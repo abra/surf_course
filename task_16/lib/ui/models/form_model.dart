@@ -33,13 +33,6 @@ class FormModel with ChangeNotifier {
     return _isReadyForSubmit;
   }
 
-  // bool get isReadyForSubmit {
-  //   if (formData.isEmpty) {
-  //     return false;
-  //   }
-  //   return !formData.values.contains(false);
-  // }
-
   set formSubmitted(bool value) {
     isSubmitted = value;
     notifyListeners();
