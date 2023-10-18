@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '/common/extensions.dart';
 import '/ui/components/pet_registration_form/nokeyboard_editable_text_focusnode.dart';
 import 'form_field_widget.dart';
 
@@ -37,7 +36,11 @@ class DateFormFieldWidget extends StatelessWidget {
       if (!datePattern.hasMatch(value)) return 'Укажите дату';
 
       // Проверяем что дата раньше текущей
-      final isToday = DateFormat('dd.MM.yyyy').parse(value).isToday;
+      final date = DateFormat('dd.MM.yyyy').parse(value);
+      final now = DateTime.now();
+      final isToday = now.day == date.day &&
+          now.month == date.month &&
+          now.year == date.year;
       if (isToday) return 'Дата должна быть раньше текущей';
     }
 
