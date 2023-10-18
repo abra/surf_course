@@ -19,16 +19,22 @@ class SubmitFormButtonWidget extends StatefulWidget {
 class _SubmitFormButtonWidgetState extends State<SubmitFormButtonWidget> {
   bool _isSending = false;
 
-  Future<void> _sendData() async {
+  Future<void> _sendData(FormModel formModel) async {
     setState(() {
       _isSending = true;
     });
+
+    formModel.formSubmitted = true;
+    formModel.isReadyForSubmit = false;
 
     await Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _isSending = false;
       });
     });
+
+    formModel.isSubmitted = false;
+    formModel.isReadyForSubmit = true;
   }
 
   @override
@@ -45,11 +51,9 @@ class _SubmitFormButtonWidgetState extends State<SubmitFormButtonWidget> {
             onPressed: formModel.isReadyForSubmit && _isSending == false
                 ? () async {
                     if (widget.formKey.currentState!.validate()) {
-                      formModel.isSubmitted = true;
-                      formModel.isReadyForSubmit = false;
-                      await _sendData();
-                      formModel.isSubmitted = false;
-                      formModel.isReadyForSubmit = true;
+                      if (mounted) {
+                        await _sendData(formModel);
+                      }
                     }
                   }
                 : null,
