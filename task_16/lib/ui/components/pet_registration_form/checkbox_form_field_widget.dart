@@ -40,7 +40,6 @@ class CheckboxFormFieldWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: context.iconColors.inActiveBg,
                         borderRadius: BorderRadius.circular(8),
-                        border: null,
                       ),
                       child: Transform.scale(
                         scale: 1.3,
