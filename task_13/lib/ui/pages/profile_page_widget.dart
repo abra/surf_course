@@ -40,7 +40,7 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20.0),
           child: SizedBox(
             width: double.infinity,
             height: 48,
