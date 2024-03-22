@@ -1,20 +1,5 @@
-# Description of your result
+# Цели
 
-You can describe your results in any language that is convenient for you, not just English.
+1. **Понимание условий и циклов**: Задача позволяет практиковаться в использовании условных операторов (`if`, `switch`) и циклов (`while`, `do while`) для управления потоком выполнения программы в зависимости от различных условий, таких как наличие еды, тип питомца и другие.
 
-## Description
-
-[Describe what you have done]
-
-## How to
-
-[Describe how to run your application if there are any issues]
-
-## Problems
-
-[Describe the problems you encountered]
-
-## More
-
-[Here you can brag about what you managed to implement or do something beyond the task]
-
+2. **Использование перечислений и переключателей**: Применение перечислений и переключателей (`switch`) для определения типа питомца и выполнения соответствующих действий обучает структурированию данных и выбору действий на основе типа.
