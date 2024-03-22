@@ -1,20 +1,15 @@
-# Description of your result
+# Description
 
-You can describe your results in any language that is convenient for you, not just English.
+Этот код на Dart выполняет анализ информации о сельскохозяйственной технике в различных странах
 
-## Description
+1. Создаётся общий словарь `summary`, объединяющий информацию о технике до 2010 года и после 2010 года для каждой страны.
+2. Для каждой страны создаётся список `Territory`, содержащий информацию о площади, культурах и сельскохозяйственной технике.
+3. Создаются классы `Territory` и `AgriculturalMachinery`, которые описывают территории и сельскохозяйственную технику соответственно.
+4. Подсчитывается средний возраст всей техники и средний возраст половины самой старой техники.
 
-[Describe what you have done]
+## Использование
 
-## How to
-
-[Describe how to run your application if there are any issues]
-
-## Problems
-
-[Describe the problems you encountered]
-
-## More
-
-[Here you can brag about what you managed to implement or do something beyond the task]
-
+1. Использование коллекций (Map, List, Set) для организации данных.
+2. Работа с классами и переопределение методов (`operator ==`, `hashCode`).
+3. Применение функций высшего порядка (`fold`, `toList`, `sort`, `take`) для обработки и анализа данных.
+4. Работа с датами и вычисления разницы между ними.
