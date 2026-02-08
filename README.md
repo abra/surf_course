@@ -1,5 +1,3 @@
-Курсовые работы Айдара Хабибуллина
-
 <div align="center">
   <img src="https://github.com/user-attachments/assets/5c363ef3-9afd-4de8-96f1-6aae801ac358" width="200">
   <img src="https://github.com/user-attachments/assets/c111d35b-dfe3-46a9-8d24-e8202e245eb8" width="200">
